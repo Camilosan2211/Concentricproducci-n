@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html lang="es-CO">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Concentric Lab — Templates de Notion, automatizaciones y diseño UX para founders en LATAM</title>
+<meta name="description" content="Plantillas de Notion, automatizaciones y recursos de diseño UX/UI listos para usar. Herramientas prácticas impulsadas por IA para founders y creators en LATAM.">
+<link rel="icon" href="assets/images/favicon.png">
+<link rel="apple-touch-icon" href="assets/images/favicon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Concentric Lab — Templates, automatizaciones y diseño UX para LATAM">
+<meta property="og:description" content="Plantillas de Notion, automatizaciones y recursos de diseño UX/UI para founders y creators en LATAM.">
+<meta property="og:image" content="assets/images/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Concentric Lab — Templates, automatizaciones y diseño UX para LATAM">
+<meta name="twitter:image" content="assets/images/og-image.png">
+<!-- TODO: Actualizar esta URL cuando tengas dominio propio (ej. concentriclab.com) -->
+<link rel="canonical" href="https://concentriclab.netlify.app/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Inter desde Google Fonts (confiable, siempre disponible) -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<!-- Cal Sans desde jsDelivr/fontsource (fuente de Cal.com, no está en Google Fonts) -->
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/cal-sans/index.css" rel="stylesheet">
+
+<!-- JSON-LD Structured Data -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Organization",
+  "name":"Concentric Lab",
+  "url":"https://concentriclab.netlify.app/",
+  "logo":"assets/images/logo.png",
+  "description":"Studio de diseño UX/UI, inteligencia artificial y automatización desde Bogotá. Templates, sistemas y herramientas prácticas para founders y creators en LATAM.",
+  "address":{"@type":"PostalAddress","addressLocality":"Bogotá","addressCountry":"CO"},
+  "sameAs":[
+    "https://www.linkedin.com/company/concentriclab/",
+    "https://www.instagram.com/concentriclab",
+    "https://www.youtube.com/@ConcentricLab"
+  ],
+  "offers":{"@type":"Offer","name":"Kit de métricas digitales","url":"https://concentriclab.gumroad.com/l/metricasdigitales"}
+}
+
+/* Cursor morphing */
+if(window.matchMedia("(pointer:fine)").matches){
+  const cur = document.createElement("div");
+  cur.className = "cl-cursor";
+  document.body.appendChild(cur);
+  document.addEventListener("mousemove",e=>{
+    cur.style.left = e.clientX+"px";
+    cur.style.top = e.clientY+"px";
+  });
+  document.querySelectorAll("a,button,[data-cursor],.enfoque-tag,.product-card,.stack-item,.nav-cta").forEach(el=>{
+    el.addEventListener("mouseenter",()=>cur.classList.add("hover"));
+    el.addEventListener("mouseleave",()=>cur.classList.remove("hover","click"));
+  });
+  document.addEventListener("mousedown",()=>cur.classList.add("click"));
+  document.addEventListener("mouseup",()=>cur.classList.remove("click"));
+}
+
+</script>
+
+<style>
+/* ── FONTS: cargadas via Google Fonts + jsDelivr (ver <link> en <head>) ── */
+
+/* ── TOKENS ─────────────────────────────────────── */
+:root{
+  color-scheme: light;
+  --bg:rgb(220,220,220);
+  --bg-header:rgba(240,240,240,0.9);
+  --text-dark:rgb(19,19,19);
+  --text-muted:rgb(92,92,92);
+  --white:rgb(255,255,255);
+  --white-64:rgba(255,255,255,0.64);
+  --white-80:rgba(255,255,255,0.8);
+  --white-10:rgba(255,255,255,0.1);
+  --white-16:rgba(255,255,255,0.16);
+  --orange:rgb(255,77,0);
+  --salmon:rgb(244,132,95);
+  --blue:rgb(91,99,245);
+  --blue-lt:rgb(135,141,255);
+  --pink:rgb(255,144,232);
+  --green:rgb(97,197,84);
+  --dark:rgb(12,12,12);
+  --dark-glass:rgba(12,12,12,0.82);
+  --max-w:1200px;
+  --pad:clamp(20px,5vw,80px);
+  --gap:clamp(80px,10vw,140px);
+}
+
+/* ── RESET ──────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"Inter",Arial,sans-serif;background:var(--bg);color:var(--text-dark);overflow-x:hidden;-webkit-font-smoothing:antialiased;transition:background .25s,color .25s}
+body.dark{--bg:rgb(12,12,12);--bg-header:rgba(18,18,18,0.86);--text-dark:rgb(244,244,244);--text-muted:rgba(255,255,255,.64);--white:rgb(255,255,255);background:var(--bg);color:var(--text-dark)}
+body.dark .nav-ghost{background:rgba(255,255,255,.08);color:var(--white);border-color:rgba(255,255,255,.12)}
+body.dark .nav-notch{background:rgba(255,255,255,.06)}
+body.dark .contact-social a, body.dark .stack-item, body.dark .nl-card{background:rgba(255,255,255,.06)}
+img,video{display:block;max-width:100%}
+a{text-decoration:none;color:inherit}
+ul{list-style:none}
+button{cursor:pointer;font-family:inherit;border:none;background:none}
+
+.wrap{width:100%;max-width:var(--max-w);margin:0 auto;padding:0 var(--pad)}
+
+/* ── REVEAL ─────────────────────────────────────── */
+.reveal{opacity:0;transform:translateY(36px);transition:opacity .72s cubic-bezier(.22,1,.36,1),transform .72s cubic-bezier(.22,1,.36,1)}
+.reveal.in{opacity:1;transform:none}
+.reveal-delay-1{transition-delay:.1s}
+.reveal-delay-2{transition-delay:.2s}
+.reveal-delay-3{transition-delay:.3s}
+
+/* ── PROGRESS ───────────────────────────────────── */
+#progress{position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,var(--blue),var(--orange));z-index:9999;pointer-events:none}
+
+/* ══════════════════════════════════════════════════
+   HEADER
+══════════════════════════════════════════════════ */
+header{
+  position:fixed;top:0;left:0;width:100%;z-index:100;
+  background:var(--bg-header);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  display:flex;flex-direction:column;align-items:center;
+  transition:box-shadow .3s;
+}
+.nav-notch{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:5px 20px 9px;
+  background:var(--blue);
+  border-radius:0 0 72px 72px;
+  margin-top:-4px;
+  margin-bottom:4px;
+  box-shadow:0 4px 16px rgba(91,99,245,.25);
+}
+.nav-notch .dot{width:7px;height:7px;border-radius:50%;background:var(--salmon);flex-shrink:0;
+  animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(244,132,95,.6)}50%{box-shadow:0 0 0 5px rgba(244,132,95,0)}}
+.nav-notch a{
+  font-size:12px;color:var(--white);background:transparent;
+  padding:3px 4px;font-weight:500;
+  display:flex;align-items:center;gap:5px;transition:opacity .2s;
+}
+.nav-notch a:hover{opacity:.8}
+.nav-notch a svg{opacity:.9}
+.nav-bar{
+  width:100%;max-width:var(--max-w);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px clamp(20px,4vw,40px);
+}
+.nav-logo{height:22px;width:auto;object-fit:contain}
+.nav-links{display:flex;align-items:center;gap:28px}
+.nav-links a{font-size:14px;color:var(--text-muted);font-weight:500;transition:color .2s;position:relative}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:-2px;width:0;height:1px;background:var(--text-dark);transition:width .25s}
+.nav-links a:hover{color:var(--text-dark)}
+.nav-links a:hover::after{width:100%}
+.nav-cta{
+  background:var(--blue);color:var(--white);
+  border-radius:50px;padding:9px 20px;font-size:14px;font-weight:500;
+  border:1px solid var(--white-10);
+  box-shadow:0 4px 14px rgba(91,99,245,.35);
+  transition:transform .2s,box-shadow .2s;
+}
+.nav-cta:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(91,99,245,.45)}
+
+.filosofia-compact{margin:0 -var(--pad);padding:var(--pad)}
+.filosofia-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,6vw,64px);align-items:start}
+.filo-quote-col{opacity:0;transform:translateX(-24px);animation:fadeRight 1.2s forwards}
+.filo-stats-col{position:relative}
+.stats-block{height:280px !important;border-radius:24px !important;margin:0 !important}
+.stat-num{font-size:clamp(36px,5vw,56px) !important}
+@keyframes fadeRight{to{opacity:1;transform:none}}
+.nav-ghost{background:rgba(19,19,19,.06);color:var(--text-dark);border:1px solid rgba(19,19,19,.08);border-radius:50px;padding:8px 12px;font-size:13px;font-weight:600;transition:background .2s,transform .2s}
+.nav-ghost:hover{background:rgba(19,19,19,.1);transform:translateY(-1px)}
+.nav-hamburger{display:none;flex-direction:column;gap:5px;padding:6px}
+.nav-hamburger span{display:block;width:22px;height:2px;background:var(--text-dark);border-radius:2px;transition:all .3s}
+
+/* ── MOBILE MENU ─────────────────────────────────── */
+#mobile-menu{
+  display:none;position:fixed;inset:0;background:var(--bg);z-index:200;
+  flex-direction:column;align-items:center;justify-content:center;gap:36px;
+}
+#mobile-menu.open{display:flex}
+#mobile-menu a{font-family:"Cal Sans",sans-serif;font-size:34px;color:var(--text-dark);transition:color .2s}
+#mobile-menu a:hover{color:var(--blue)}
+#mob-close{position:absolute;top:24px;right:24px;font-size:26px;color:var(--text-dark)}
+
+/* ══════════════════════════════════════════════════
+   HERO
+══════════════════════════════════════════════════ */
+#hero{
+  min-height:100vh;padding-top:130px;
+  display:flex;align-items:center;justify-content:center;text-align:center;
+}
+.hero-inner{display:flex;flex-direction:column;align-items:center;gap:28px;padding:40px var(--pad)}
+.hero-label{font-size:13px;color:var(--text-muted);font-weight:500;letter-spacing:.06em;text-transform:uppercase}
+.hero-heading{display:flex;flex-direction:column;gap:2px;align-items:center}
+.hero-row{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:nowrap}
+.hero-h1{font-family:"Cal Sans",sans-serif;font-size:clamp(36px,6.2vw,74px);font-weight:400;line-height:1.04;letter-spacing:-1px}
+.hero-h1.dark{color:var(--text-dark)}
+.hero-h1.orange{color:var(--orange)}
+.hero-h1.blue{color:var(--blue)}
+.hero-img{
+  width:clamp(54px,5.2vw,80px);height:clamp(54px,5.2vw,80px);
+  border-radius:50px;object-fit:cover;flex-shrink:0;
+  opacity:0;transform:scale(0.4) rotate(-180deg);
+  animation:heroImg 1.6s cubic-bezier(0.22,1,0.36,1) 0.4s forwards;
+}
+@keyframes heroImg{to{opacity:1;transform:scale(1) rotate(0deg)}}
+.hero-sub{max-width:560px;font-size:clamp(15px,1.8vw,17px);color:var(--text-muted);line-height:1.65;margin:4px auto 0}
+.hero-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:center}
+.hero-btn-primary{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--dark-glass);color:var(--white);
+  border-radius:50px;padding:13px 26px;font-size:15px;font-weight:500;
+  border:1px solid var(--white-10);
+  box-shadow:0 3px 6px rgba(0,0,0,.19),0 10px 10px rgba(0,0,0,.15);
+  transition:transform .25s,opacity .25s;
+}
+.hero-btn-primary:hover{transform:translateY(-2px)}
+.hero-btn-secondary{
+  display:inline-flex;align-items:center;gap:7px;
+  background:transparent;color:var(--text-muted);
+  border-radius:50px;padding:13px 22px;font-size:15px;font-weight:500;
+  border:1px solid rgba(19,19,19,0.2);
+  transition:border-color .2s,color .2s;
+}
+.hero-btn-secondary:hover{border-color:rgba(19,19,19,.5);color:var(--text-dark)}
+
+/* ══════════════════════════════════════════════════
+   TICKER
+══════════════════════════════════════════════════ */
+.ticker-section{padding:clamp(20px,3vw,40px) 0;overflow:hidden;position:relative}
+.ticker-section::before,.ticker-section::after{content:"";position:absolute;top:0;width:140px;height:100%;z-index:1}
+.ticker-section::before{left:0;background:linear-gradient(to right,var(--bg),transparent)}
+.ticker-section::after{right:0;background:linear-gradient(to left,var(--bg),transparent)}
+.ticker-track{display:flex;gap:14px;width:max-content;animation:ticker 24s linear infinite}
+.ticker-track:hover{animation-play-state:paused}
+@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.tag-pill{
+  display:flex;align-items:center;gap:7px;
+  background:var(--blue);color:var(--white-80);
+  border-radius:50px;padding:9px 17px;font-size:13px;font-weight:500;
+  border:1px solid var(--white-10);white-space:nowrap;
+  box-shadow:inset 0 .5px .5px rgba(255,255,255,.24),inset 0 4px 16px var(--white-16);
+}
+.tag-pill svg{opacity:.64;flex-shrink:0}
+
+/* ══════════════════════════════════════════════════
+   ENFOQUE
+══════════════════════════════════════════════════ */
+#enfoque{padding:var(--gap) var(--pad)}
+.enfoque-inner{max-width:var(--max-w);margin:0 auto}
+.section-label{display:flex;align-items:center;gap:2px;margin-bottom:28px}
+.section-label img{height:32px;width:auto;object-fit:contain}
+.section-label::before{content:"(";
+  font-size:22px;font-weight:500;color:var(--blue);line-height:1;margin-right:4px}
+.section-label::after{content:")";
+  font-size:22px;font-weight:500;color:var(--blue);line-height:1;margin-left:4px}
+.enfoque-text{text-align:center;font-size:clamp(24px,4vw,46px);
+  font-family:"Cal Sans",sans-serif;
+  font-size:clamp(26px,4.5vw,54px);
+  line-height:1.18;max-width:800px;letter-spacing:-.5px;
+  color:var(--salmon);
+  transition:color .6s cubic-bezier(0.22,1,0.36,1);
+}
+#enfoque .enfoque-text.scrolled{color:rgb(19,19,19)}
+.enfoque-text .accent{color:var(--salmon)}
+.enfoque-tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:36px}
+
+.enfoque-tag{
+  display:flex;align-items:center;gap:7px;
+  background:var(--blue);color:var(--white-80);
+  border-radius:50px;padding:10px 18px;font-size:13px;font-weight:500;
+  border:1px solid var(--white-10);
+  box-shadow:inset 0 .5px .5px rgba(255,255,255,.24), 0 6px 24px rgba(91,99,245,.25);
+  opacity:0;transform:translateY(20px) scale(0.92);
+  animation:tagModern 2.8s cubic-bezier(0.34,1.56,0.64,1) forwards;
+}
+.enfoque-tag:nth-child(1){animation-delay:.8s}
+.enfoque-tag:nth-child(2){animation-delay:1.0s}
+.enfoque-tag:nth-child(3){animation-delay:1.2s}
+.enfoque-tag:nth-child(4){animation-delay:1.4s}
+.enfoque-tag:nth-child(5){animation-delay:1.6s}
+.enfoque-tag:nth-child(6){animation-delay:1.8s}
+@keyframes tagModern{
+  0%{opacity:0;transform:translateY(20px) scale(0.92) rotate(-2deg)}
+  60%{opacity:1;transform:translateY(-2px) scale(1.02) rotate(1deg)}
+  100%{opacity:1;transform:translateY(0) scale(1) rotate(0)}
+}
+.enfoque-tag:hover{transform:translateY(-6px) scale(1.04) rotate(0) !important;box-shadow:0 12px 32px rgba(91,99,245,.4)}
+
+.enfoque-tag svg{opacity:.64}
+
+/* ══════════════════════════════════════════════════
+   MANIFIESTO (antes "filosofia")
+══════════════════════════════════════════════════ */
+#filosofia{padding:var(--gap) var(--pad)}
+.filosofia-inner{max-width:var(--max-w);margin:0 auto;display:flex;flex-direction:column;gap:44px}
+.gradient-title{
+  font-family:"Cal Sans",sans-serif;
+  font-size:clamp(36px,6.5vw,76px);font-weight:400;line-height:1;
+  background:linear-gradient(0deg,var(--blue-lt) 0%,rgba(0,0,0,0.4) 159%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:inline;
+}
+
+/* STATS — reales */
+.stats-block{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  background:rgba(16,16,20,0.94);border-radius:24px;overflow:hidden;
+  position:relative;min-height:260px;
+}
+.stats-video{position:absolute;inset:0;object-fit:cover;width:100%;height:100%;opacity:.14}
+.stat-item{
+  position:relative;z-index:1;
+  padding:clamp(28px,5vw,52px) clamp(22px,4vw,40px);
+  border-right:1px solid rgba(255,255,255,0.06);
+  display:flex;flex-direction:column;gap:10px;
+}
+.stat-item:last-child{border-right:none}
+.stat-num{
+  font-family:"Cal Sans",sans-serif;
+  font-size:clamp(44px,6vw,72px);color:var(--white);line-height:1;
+}
+.stat-label{font-size:13px;color:rgba(255,255,255,.6);line-height:1.4}
+.stat-sublabel{font-size:11px;color:rgba(255,255,255,.3);margin-top:2px}
+
+/* PRINCIPIOS (antes testimonios) */
+.principios-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.principios-header h3{font-size:14px;color:var(--text-muted);font-weight:500}
+.testimonial-wrap{position:relative;overflow:hidden;border-radius:24px}
+.testimonial-track{display:flex;transition:transform .6s cubic-bezier(.25,.46,.45,.94)}
+.testimonial-card{flex:0 0 100%;position:relative;height:clamp(240px,32vw,380px);border-radius:24px;overflow:hidden}
+.testimonial-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top}
+.t-overlay{position:absolute;inset:0;background:rgba(12,12,12,0.42);backdrop-filter:blur(2px)}
+.t-content{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:clamp(18px,3.5vw,32px)}
+.t-header{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.2);padding-bottom:10px}
+.t-num{font-size:13px;color:var(--white);font-weight:500}
+.t-total{font-size:13px;color:var(--white-64)}
+.t-body{display:flex;flex-direction:column;gap:14px}
+.t-quote{font-size:clamp(15px,2.2vw,20px);color:var(--white);line-height:1.4;font-style:italic}
+.t-author-row{display:flex;flex-direction:column;gap:2px}
+.t-brand{font-size:13px;color:var(--white);font-weight:500}
+.t-source{font-size:12px;color:var(--white-64)}
+.slider-arrows{position:absolute;bottom:clamp(14px,2.5vw,28px);right:clamp(14px,2.5vw,28px);display:flex;gap:8px;z-index:2}
+.slider-arrow{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.18);backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;color:var(--white);cursor:pointer;transition:background .2s;font-size:16px}
+.slider-arrow:hover{background:rgba(255,255,255,.32)}
+.slider-dots{display:flex;gap:7px;justify-content:center;margin-top:14px}
+.slider-dot{width:7px;height:7px;border-radius:50%;background:rgba(19,19,19,.2);cursor:pointer;transition:background .3s,transform .3s;border:none}
+.slider-dot.active{background:var(--blue);transform:scale(1.35)}
+
+/* ══════════════════════════════════════════════════
+   PRODUCTOS
+══════════════════════════════════════════════════ */
+#productos{padding:var(--gap) var(--pad)}
+.productos-inner{max-width:var(--max-w);margin:0 auto;display:flex;flex-direction:column;gap:40px}
+.gradient-title-alt{
+  font-family:"Cal Sans",sans-serif;
+  font-size:clamp(32px,5.5vw,68px);font-weight:400;line-height:1;
+  background:linear-gradient(0deg,rgb(125,131,250) 0%,rgba(0,0,0,0.4) 159%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+
+/* Grid de productos */
+.products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.product-card{
+  border-radius:20px;overflow:hidden;background:rgb(19,19,19);
+  display:flex;flex-direction:column;position:relative;
+  transition:transform .3s,box-shadow .3s;min-height:420px;
+}
+.product-card:hover{transform:translateY(-4px);box-shadow:0 20px 48px rgba(0,0,0,.18)}
+.product-card.coming-soon{opacity:.55;cursor:default}
+.product-card.coming-soon:hover{transform:none;box-shadow:none}
+.product-thumb{width:100%;height:200px;object-fit:cover;object-position:center top;flex-shrink:0}
+.product-body{padding:20px;display:flex;flex-direction:column;gap:10px;flex:1}
+.product-type{
+  font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--blue-lt);background:rgba(91,99,245,.15);
+  border-radius:20px;padding:3px 10px;width:fit-content;
+}
+.product-type.notion{color:rgb(255,144,232);background:rgba(255,144,232,.12)}
+.product-title{font-family:"Cal Sans",sans-serif;font-size:clamp(18px,2vw,22px);color:var(--white);line-height:1.2}
+.product-desc{font-size:13px;color:rgba(255,255,255,.55);line-height:1.6;flex:1}
+.product-footer{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:12px;border-top:1px solid rgba(255,255,255,.07)}
+.product-price{font-family:"Cal Sans",sans-serif;font-size:20px;color:var(--white)}
+.product-btn{
+  display:flex;align-items:center;gap:5px;
+  background:var(--pink);color:rgb(0,0,0);
+  border-radius:50px;padding:8px 14px;font-size:13px;font-weight:500;
+  transition:opacity .2s,transform .2s;white-space:nowrap;
+}
+.product-btn:hover{opacity:.9;transform:translateY(-1px)}
+.product-btn img{width:14px;height:14px}
+.product-coming{
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,.06);color:rgba(255,255,255,.3);
+  border-radius:50px;padding:8px 16px;font-size:13px;
+  border:1px dashed rgba(255,255,255,.15);
+}
+.cs-badge{
+  position:absolute;top:16px;right:16px;
+  background:rgba(19,19,19,.7);backdrop-filter:blur(6px);
+  border:1px solid rgba(255,255,255,.1);
+  color:rgba(255,255,255,.5);border-radius:20px;
+  padding:4px 10px;font-size:11px;font-weight:500;
+}
+
+/* ══════════════════════════════════════════════════
+   YOUTUBE SECTION
+══════════════════════════════════════════════════ */
+#contenido{padding:var(--gap) var(--pad)}
+.yt-inner{max-width:var(--max-w);margin:0 auto;display:flex;flex-direction:column;gap:36px}
+.yt-card{
+  display:grid;grid-template-columns:1.2fr 1fr;gap:0;
+  background:rgb(19,19,19);border-radius:24px;overflow:hidden;min-height:340px;
+  transition:box-shadow .3s;
+}
+.yt-card:hover{box-shadow:0 24px 56px rgba(0,0,0,.18)}
+.yt-thumb{position:relative;overflow:hidden;cursor:pointer}
+.yt-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.yt-card:hover .yt-thumb img{transform:scale(1.03)}
+.yt-play{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  background:rgba(0,0,0,.35);transition:background .2s;
+}
+.yt-card:hover .yt-play{background:rgba(0,0,0,.22)}
+.yt-play-btn{
+  width:68px;height:68px;border-radius:50%;
+  background:rgba(255,255,255,.92);display:flex;align-items:center;justify-content:center;
+  transition:transform .25s,background .2s;
+}
+.yt-card:hover .yt-play-btn{transform:scale(1.08);background:var(--white)}
+.yt-play-btn svg{margin-left:4px}
+.yt-lang-badge{
+  position:absolute;top:16px;left:16px;
+  background:rgba(19,19,19,.8);backdrop-filter:blur(6px);
+  border:1px solid rgba(255,255,255,.1);
+  color:var(--white-80);border-radius:20px;
+  padding:4px 10px;font-size:11px;font-weight:600;
+  letter-spacing:.05em;
+}
+.yt-content{padding:clamp(28px,4vw,48px);display:flex;flex-direction:column;justify-content:space-between;gap:20px}
+.yt-meta{display:flex;flex-direction:column;gap:12px}
+.yt-channel{display:flex;align-items:center;gap:8px;font-size:12px;color:rgba(255,255,255,.5)}
+.yt-channel svg{color:rgb(255,0,0)}
+.yt-title{font-family:"Cal Sans",sans-serif;font-size:clamp(20px,2.5vw,28px);color:var(--white);line-height:1.25}
+.yt-desc{font-size:14px;color:rgba(255,255,255,.55);line-height:1.6}
+.yt-cta{
+  display:inline-flex;align-items:center;gap:7px;
+  background:rgb(255,0,0);color:var(--white);
+  border-radius:50px;padding:11px 22px;font-size:14px;font-weight:500;
+  width:fit-content;transition:opacity .2s,transform .2s;
+}
+.yt-cta:hover{opacity:.9;transform:translateY(-2px)}
+
+/* ══════════════════════════════════════════════════
+   STACK
+══════════════════════════════════════════════════ */
+#stack{padding:var(--gap) var(--pad)}
+.stack-inner{max-width:var(--max-w);margin:0 auto;display:flex;flex-direction:column;gap:36px}
+.stack-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
+.stack-item{
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  background:rgba(19,19,19,0.05);border:1px solid rgba(19,19,19,0.08);
+  border-radius:16px;padding:20px 16px;
+  transition:background .2s,transform .2s,border-color .2s;
+  cursor:default;
+}
+.stack-item:hover{background:rgba(19,19,19,.09);transform:translateY(-3px);border-color:rgba(19,19,19,.15)}
+.stack-icon{width:40px;height:40px;border-radius:10px;object-fit:contain;background:var(--white);padding:6px}
+.stack-name{font-size:13px;font-weight:600;color:var(--text-dark)}
+.stack-use{font-size:11px;color:var(--text-muted);text-align:center;line-height:1.4}
+
+/* ══════════════════════════════════════════════════
+   NEWSLETTER
+══════════════════════════════════════════════════ */
+#newsletter{padding:var(--gap) var(--pad)}
+.nl-inner{max-width:var(--max-w);margin:0 auto}
+.nl-card{
+  background:linear-gradient(135deg,rgba(91,99,245,.12) 0%,rgba(244,132,95,.08) 100%);
+  border:1px solid rgba(91,99,245,.2);
+  border-radius:24px;padding:clamp(40px,6vw,72px) clamp(32px,5vw,64px);
+  display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap;
+}
+.nl-text{display:flex;flex-direction:column;gap:10px;max-width:480px}
+.nl-title{font-family:"Cal Sans",sans-serif;font-size:clamp(24px,3.5vw,40px);color:var(--text-dark);line-height:1.15}
+.nl-sub{font-size:15px;color:var(--text-muted);line-height:1.55}
+.nl-form{display:flex;gap:10px;flex-wrap:wrap}
+.nl-input{
+  flex:1;min-width:220px;
+  background:var(--white);border:1.5px solid rgba(19,19,19,0.12);
+  border-radius:50px;padding:12px 20px;font-size:14px;font-family:"Inter",sans-serif;
+  color:var(--text-dark);outline:none;transition:border-color .2s;
+}
+.nl-input:focus{border-color:var(--blue)}
+.nl-input::placeholder{color:var(--text-muted)}
+.nl-btn{
+  background:var(--blue);color:var(--white);
+  border-radius:50px;padding:12px 24px;font-size:14px;font-weight:500;
+  border:none;cursor:pointer;white-space:nowrap;
+  box-shadow:0 4px 14px rgba(91,99,245,.3);
+  transition:transform .2s,box-shadow .2s;
+}
+.nl-btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(91,99,245,.4)}
+.nl-note{font-size:11px;color:var(--text-muted);margin-top:8px}
+
+/* ══════════════════════════════════════════════════
+   CONTACT (reducido)
+══════════════════════════════════════════════════ */
+#contact{padding:var(--gap) var(--pad)}
+.contact-inner{max-width:var(--max-w);margin:0 auto;display:flex;flex-direction:column;gap:32px}
+.contact-heading{
+  font-family:"Cal Sans",sans-serif;
+  font-size:clamp(44px,8vw,100px);font-weight:400;line-height:1;
+  background:linear-gradient(0deg,rgb(120,126,245) 0%,rgba(0,0,0,0.4) 159%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  -webkit-mask:linear-gradient(0deg,rgba(0,0,0,0) 0%,rgb(0,0,0) 45%);
+  mask:linear-gradient(0deg,rgba(0,0,0,0) 0%,rgb(0,0,0) 45%);
+}
+.contact-card{position:relative;border-radius:32px;overflow:hidden;min-height:360px}
+.contact-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.contact-overlay{position:absolute;inset:0;background:rgba(12,12,12,.48)}
+.contact-content{
+  position:relative;z-index:1;
+  display:grid;grid-template-columns:1fr 1.2fr;gap:40px;
+  padding:clamp(36px,5vw,64px) clamp(28px,4.5vw,56px);
+}
+.contact-left{display:flex;flex-direction:column;gap:14px;justify-content:center}
+.contact-title{font-family:"Cal Sans",sans-serif;font-size:clamp(24px,3.5vw,42px);color:var(--white);line-height:1.2}
+.contact-sub{font-size:15px;color:var(--white-80);line-height:1.55}
+.contact-social{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+.contact-social a{
+  display:flex;align-items:center;gap:6px;
+  background:rgba(255,255,255,.12);color:var(--white);
+  border-radius:50px;padding:7px 14px;font-size:13px;
+  border:1px solid rgba(255,255,255,.15);transition:background .2s;
+}
+.contact-social a:hover{background:rgba(255,255,255,.2)}
+.tally-frame{width:100%;border:none;min-height:380px;background:transparent}
+
+/* Contact ticker */
+.contact-ticker{overflow:hidden;position:relative}
+.contact-ticker::before,.contact-ticker::after{content:"";position:absolute;top:0;width:100px;height:100%;z-index:1}
+.contact-ticker::before{left:0;background:linear-gradient(to right,var(--bg),transparent)}
+.contact-ticker::after{right:0;background:linear-gradient(to left,var(--bg),transparent)}
+.contact-ticker-track{display:flex;gap:14px;width:max-content;animation:ticker 32s linear infinite;padding:10px 0}
+.c-tag{background:rgba(19,19,19,.07);color:var(--text-muted);border-radius:50px;padding:7px 14px;font-size:12px;white-space:nowrap;border:1px solid rgba(19,19,19,.09)}
+
+/* ══════════════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════════════ */
+footer{padding:8px;margin-top:clamp(20px,3vw,40px)}
+.footer-card{border-radius:32px;overflow:hidden;position:relative;min-height:300px}
+.footer-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.footer-overlay{position:absolute;inset:0;background:rgba(12,12,12,.62)}
+.footer-content{
+  position:relative;z-index:1;
+  display:flex;flex-direction:column;
+  padding:clamp(36px,5vw,64px) clamp(28px,4.5vw,52px);
+  gap:44px;min-height:300px;
+}
+.footer-top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:36px}
+.footer-col{display:flex;flex-direction:column;gap:12px}
+.footer-col-title{font-size:12px;color:var(--white-64);text-transform:uppercase;letter-spacing:.07em}
+.footer-links{display:flex;flex-direction:column;gap:9px}
+.footer-links a{font-family:"Cal Sans",sans-serif;font-size:17px;color:var(--white);position:relative;width:fit-content;transition:opacity .2s}
+.footer-links a::after{content:"";position:absolute;left:0;bottom:-1px;width:0;height:1px;background:var(--white);transition:width .25s}
+.footer-links a:hover::after{width:100%}
+.footer-bottom{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;border-top:1px solid rgba(255,255,255,.1);padding-top:22px}
+.footer-logo{height:22px;width:auto;object-fit:contain;filter:brightness(0) invert(1)}
+.footer-copy{font-size:12px;color:var(--white-64)}
+.footer-ai-note{font-size:11px;color:rgba(255,255,255,.3);font-style:italic}
+
+/* ══════════════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════════════ */
+@media(max-width:900px){
+  .products-grid{grid-template-columns:1fr 1fr}
+  .yt-card{grid-template-columns:1fr;grid-template-rows:260px auto}
+}
+@media(max-width:810px){
+  .nav-links,.nav-cta{display:none}
+  .nav-hamburger{display:flex}
+  .hero-row{flex-direction:column;gap:6px}
+  .hero-img{display:none}
+  .stats-block{grid-template-columns:1fr}
+  .stat-item{border-right:none;border-bottom:1px solid rgba(255,255,255,.06)}
+  .stat-item:last-child{border-bottom:none}
+  .contact-content{grid-template-columns:1fr}
+  .footer-top{flex-direction:column}
+  .footer-bottom{flex-direction:column;align-items:flex-start}
+  .nl-card{flex-direction:column;gap:24px}
+}
+@media(max-width:600px){
+  .products-grid{grid-template-columns:1fr}
+  .stack-grid{grid-template-columns:repeat(3,1fr)}
+}
+
+/* Cursor morphing */
+@media(pointer:fine){
+  *{cursor:none!important}
+  .cl-cursor{position:fixed;width:10px;height:10px;background:var(--blue);border-radius:50%;pointer-events:none;z-index:999999;transform:translate(-50%,-50%);transition:width .18s,height .18s,border-radius .18s,background .18s,transform .12s cubic-bezier(0.34,1.56,0.64,1);mix-blend-mode:difference}
+  .cl-cursor.hover{width:28px;height:28px;border-radius:6px;background:var(--salmon)}
+  .cl-cursor.click{transform:translate(-50%,-50%) scale(.7)}
+}
+
+</style>
+</head>
+<body>
+<!-- ═══════════════════════════════════════════════════════
+     ASSETS LOCALES — ESTRUCTURA DE CARPETAS PARA GITHUB
+
+     Crea esta estructura en tu repositorio:
+
+     concentriclab/
+     ├── index.html
+     └── assets/
+         ├── images/
+         │   ├── logo.png
+         │   ├── favicon.png
+         │   ├── og-image.png
+         │   ├── hero-1.jpeg
+         │   ├── hero-2.jpeg
+         │   ├── hero-3.jpeg
+         │   ├── enfoque-label.png
+         │   ├── producto-1.png
+         │   ├── principio-1.jpeg
+         │   ├── principio-2.jpeg
+         │   ├── principio-3.jpeg
+         │   ├── yt-thumbnail.png
+         │   ├── contact-bg.png
+         │   ├── footer-bg.jpeg
+         │   └── gumroad-icon.svg
+         └── video/
+             └── stats-bg.mp4
+
+     URLs originales de Framer (descarga cada una):
+
+     stats-bg.mp4                   ← assets/video/stats-bg.mp4
+     og-image.png                   ← assets/images/og-image.png
+     contact-bg.png                 ← assets/images/contact-bg.png
+     hero-3.jpeg                    ← assets/images/hero-3.jpeg
+     principio-3.jpeg               ← assets/images/principio-3.jpeg
+     gumroad-icon.svg               ← assets/images/gumroad-icon.svg
+     hero-2.jpeg                    ← assets/images/hero-2.jpeg
+     producto-1.png                 ← assets/images/producto-1.png
+     principio-2.jpeg               ← assets/images/principio-2.jpeg
+     enfoque-label.png              ← assets/images/enfoque-label.png
+     yt-thumbnail.png               ← assets/images/yt-thumbnail.png
+     footer-bg.jpeg                 ← assets/images/footer-bg.jpeg
+     logo.png                       ← assets/images/logo.png
+     favicon.png                    ← assets/images/favicon.png
+     hero-1.jpeg                    ← assets/images/hero-1.jpeg
+     principio-1.jpeg               ← assets/images/principio-1.jpeg
+══════════════════════════════════════════════════════ -->
+
+
+<!--
+  ════════════════════════════════════════════════════════════════════
+  ⚠️  IMÁGENES ALOJADAS EN FRAMER CDN — ACCIÓN PENDIENTE
+  ════════════════════════════════════════════════════════════════════
+  Varias imágenes y el video de fondo cargan desde framerusercontent.com.
+  Esto funciona ahora, pero puede romperse si tu proyecto en Framer
+  se elimina o cambia. Antes de lanzar en producción:
+
+  1. Descarga cada imagen desde las URLs framerusercontent.com
+  2. Crea una carpeta /assets/img/ en tu repositorio de GitHub
+  3. Sube las imágenes ahí y reemplaza las URLs en este archivo
+
+  Las imágenes críticas a reemplazar son:
+  — Logo:        framerusercontent.com/images/hd58yXIN4R47jxZgWD19awres.png
+  — Hero foto 1: framerusercontent.com/images/rf2SDv1XBDB2J8J0Jc5rCqcm2U.jpeg
+  — Hero foto 2: framerusercontent.com/images/9uAvGuD7oMUyJdcTr62h13V7mjU.jpeg
+  — Hero foto 3: framerusercontent.com/images/4MKLmJBsDVZK97JDWqkAa17N3RU.jpeg
+  — Producto:    framerusercontent.com/images/BYbTfLPwKrQ8KDoRNlrCPLZwoj0.png
+  — Video bg:    framerusercontent.com/assets/3CTYWqZN338ZP9MTYUs5qYCvY.mp4
+  — YT thumb:    framerusercontent.com/images/YcYECqqfP3DEf1qBy7Ldk27rqbU.png
+  — Contact bg:  framerusercontent.com/images/1sREGvYWbdhqXmijCOMUIsD7A.png
+  — Footer bg:   framerusercontent.com/images/eHn2ObLmY2s5f30XS3PFk7Pnv4.jpeg
+  ════════════════════════════════════════════════════════════════════
+-->
+<div id="progress"></div>
+
+<!-- MOBILE MENU -->
+<nav id="mobile-menu" role="dialog" aria-modal="true" aria-label="Menú">
+  <button id="mob-close" aria-label="Cerrar">&#x2715;</button>
+  <a href="#productos" class="mob-link" data-i18n="nav_products">Productos</a>
+  <a href="#enfoque" class="mob-link" data-i18n="nav_focus">Enfoque</a>
+  <a href="#filosofia" class="mob-link" data-i18n="nav_manifesto">Manifiesto</a>
+  <a href="#contenido" class="mob-link" data-i18n="nav_content">Contenido</a>
+  <a href="#contact" class="mob-link" data-i18n="nav_contact" style="color:var(--blue)">Contacto</a>
+</nav>
+
+<!-- ══════════════════════════════════════════════
+     HEADER
+══════════════════════════════════════════════ -->
+<header id="site-header">
+  <div class="nav-notch">
+      <div class="dot"></div>
+      <a href="https://www.youtube.com/@ConcentricLab" target="_blank" rel="noopener">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.4-3.4C15.55 1.74 12 2 12 2s-3.55-.26-4.19 1.29a4.83 4.83 0 0 1-3.4 3.4C2.74 7.23 2 12 2 12s.74 4.77 2.41 5.31a4.83 4.83 0 0 1 3.4 3.4C8.45 22.26 12 22 12 22s3.55.26 4.19-1.29a4.83 4.83 0 0 1 3.4-3.4C21.26 16.77 22 12 22 12s-.74-4.77-2.41-5.31zM10 15.5v-7l6 3.5-6 3.5z"/></svg>
+        Nuevo video en camino →
+      </a>
+  </div>
+  <div class="nav-bar">
+    <a href="#hero" aria-label="Inicio">
+      <img src="assets/images/logo.png" alt="Concentric Lab" class="nav-logo">
+    </a>
+    <nav class="nav-links" aria-label="Principal">
+      <a href="#productos" data-i18n="nav_products">Productos</a>
+      <a href="#enfoque" data-i18n="nav_focus">Enfoque</a>
+      <a href="#filosofia" data-i18n="nav_manifesto">Manifiesto</a>
+      <a href="#contenido" data-i18n="nav_content">Contenido</a>
+    </nav>
+    <div style="display:flex;align-items:center;gap:10px">
+      <button class="nav-ghost" id="lang-toggle" type="button">ES</button>
+      <button class="nav-ghost" id="theme-toggle" type="button" aria-label="Cambiar tema">◐</button>
+      <a href="#productos" class="nav-cta" data-i18n="nav_cta">Ver plantillas</a>
+    </div>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menú" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ══════════════════════════════════════════════
+     HERO
+══════════════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-inner">
+    <p class="hero-label reveal"><span data-i18n="hero_label">Laboratorio digital</span></p>
+    <div class="hero-heading reveal">
+      <div class="hero-row">
+        <h1 class="hero-h1 dark"><span>Diseño</span><span>&nbsp;que</span></h1>
+        <img src="assets/images/hero-1.jpeg" alt="" class="hero-img" loading="eager">
+        <h1 class="hero-h1 orange"><span>Piensa.</span></h1>
+      </div>
+      <div class="hero-row">
+        <h1 class="hero-h1 blue"><span>Sistemas</span></h1>
+        <img src="assets/images/hero-2.jpeg" alt="" class="hero-img" loading="eager">
+        <h1 class="hero-h1 dark"><span>que</span><span>&nbsp;funcionan.</span></h1>
+      </div>
+      <div class="hero-row">
+        <h1 class="hero-h1 dark"><span>Experiencias</span></h1>
+        <img src="assets/images/hero-3.jpeg" alt="" class="hero-img" loading="eager">
+        <h1 class="hero-h1 blue"><span>que</span><span>&nbsp;conectan.</span></h1>
+      </div>
+    </div>
+    <p class="hero-sub reveal">
+      <span data-i18n="hero_sub">Combinamos UX, inteligencia artificial y automatización para construir
+      mejores experiencias digitales — sin perder lo humano.</span>
+    </p>
+    <div class="hero-actions reveal">
+      <a href="#productos" class="hero-btn-primary" data-i18n="hero_btn_primary">
+        Ver plantillas
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href="#contenido" class="hero-btn-secondary" data-i18n="hero_btn_secondary">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M10 15.5v-7l6 3.5-6 3.5z"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+        <span data-i18n="hero_secondary">Ver contenido</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-section" aria-hidden="true">
+  <div class="ticker-track">
+    <span class="tag-pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>Diseño UX/UI</span>
+    <span class="tag-pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>IA Generativa</span>
+    <span class="tag-pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>Branding</span>
+    <span class="tag-pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Métricas</span>
+    <span class="tag-pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/></svg>Automatización</span>
+    <span class="tag-pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/></svg>Diseño Industrial</span>
+    <span class="tag-pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>Plantillas Notion</span>
+    <span class="tag-pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8"/></svg>Sistemas digitales</span>
+    <!-- duplicate -->
+    <span class="tag-pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>Diseño UX/UI</span>
+    <span class="tag-pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>IA Generativa</span>
+    <span class="tag-pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>Branding</span>
+    <span class="tag-pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Métricas</span>
+    <span class="tag-pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/></svg>Automatización</span>
+    <span class="tag-pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/></svg>Diseño Industrial</span>
+    <span class="tag-pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>Plantillas Notion</span>
+    <span class="tag-pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8"/></svg>Sistemas digitales</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     ENFOQUE
+══════════════════════════════════════════════ -->
+<section id="enfoque">
+  <div class="enfoque-inner">
+    <div class="section-label reveal">
+      <span style="color:var(--orange);font-size:17px;margin-right:3px">(</span>
+      <img src="assets/images/enfoque-label.png" alt="Nuestro enfoque" loading="lazy">
+      <span style="color:var(--orange);font-size:17px;margin-left:3px">)</span>
+    </div>
+    <p class="enfoque-text reveal">
+      <span data-i18n="focus_text">Construimos desde el núcleo hacia afuera
+      — del usuario al sistema,
+      del problema a la solución
+      — combinando diseño, IA y automatización.</span>
+    </p>
+    <div class="enfoque-tags reveal">
+      <span class="enfoque-tag"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>Diseño UX/UI</span>
+      <span class="enfoque-tag"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>IA Generativa</span>
+      <span class="enfoque-tag"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>Branding</span>
+      <span class="enfoque-tag"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/></svg>Diseño Industrial</span>
+      <span class="enfoque-tag"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Métricas</span>
+      <span class="enfoque-tag"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/></svg>Automatización</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     MANIFIESTO / FILOSOFIA
+══════════════════════════════════════════════ -->
+<section id="filosofia">
+  <div class="filosofia-inner">
+    <div class="filosofia-single">
+      <div class="filosofia-single-top">
+        <p style="font-size:13px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:16px">(En qué creemos)</p>
+        <div style="margin-bottom:44px"><span class="gradient-title">La filosofía del lab</span></div>
+      </div>
+
+      <div class="filosofia-single-bottom">
+        <p class="filosofia-quote reveal" style="font-size:clamp(20px,3.8vw,38px);line-height:1.28;max-width:720px;margin:0 auto 48px;letter-spacing:-.25px;color:var(--text-dark);text-align:center;opacity:0;transform:translateY(24px);animation:quoteSlide 1.4s cubic-bezier(0.34,1.56,0.64,1) 0.4s forwards">
+          Construimos desde el núcleo hacia afuera — del usuario al sistema, del problema a la solución — combinando diseño, IA y automatización.
+        </p>
+
+        <!-- STATS -->
+        <div class="stats-block reveal">
+      <video class="stats-video" src="assets/video/stats-bg.mp4" autoplay muted loop playsinline></video>
+      <div class="stats-grid" style="display:contents">
+        <div class="stat-item">
+          <span class="stat-num">1</span>
+          <span class="stat-label">Proyectos entregados</span>
+          <span class="stat-sublabel">100% completados</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">6</span>
+          <span class="stat-label">Disciplinas combinadas</span>
+          <span class="stat-sublabel">Kit de métricas digitales</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">100%</span>
+          <span class="stat-label">Impulsado por IA</span>
+          <span class="stat-sublabel">Desde el diseño hasta la entrega</span>
+        </div>
+      </div>
+      </div>
+      </div>
+
+    <!-- PRINCIPIOS -->
+    <div>
+      <div class="principios-header reveal">
+        <h3>Nuestros principios</h3>
+        <span style="font-size:12px;color:var(--text-muted)">Manifiesto del lab</span>
+      </div>
+      <div style="margin-top:16px">
+        <div class="testimonial-wrap reveal" id="testimonial-slider">
+          <div class="testimonial-track" id="t-track">
+            <div class="testimonial-card">
+              <img src="assets/images/principio-1.jpeg" alt="" loading="lazy">
+              <div class="t-overlay"></div>
+              <div class="t-content">
+                <div class="t-header"><span class="t-num">01</span><span class="t-total">/ 03</span></div>
+                <div class="t-body">
+                  <p class="t-quote">&ldquo;No adoramos la IA — la usamos para reducir fricción y diseñar mejor.&rdquo;</p>
+                  <div class="t-author-row"><span class="t-brand">ConcentricLab</span><span class="t-source">Manifiesto del lab</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="testimonial-card">
+              <img src="assets/images/principio-2.jpeg" alt="" loading="lazy">
+              <div class="t-overlay"></div>
+              <div class="t-content">
+                <div class="t-header"><span class="t-num">02</span><span class="t-total">/ 03</span></div>
+                <div class="t-body">
+                  <p class="t-quote">&ldquo;Las mejores soluciones parten del centro hacia afuera: del usuario al sistema.&rdquo;</p>
+                  <div class="t-author-row"><span class="t-brand">ConcentricLab</span><span class="t-source">Manifiesto del lab</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="testimonial-card">
+              <img src="assets/images/principio-3.jpeg" alt="" loading="lazy">
+              <div class="t-overlay"></div>
+              <div class="t-content">
+                <div class="t-header"><span class="t-num">03</span><span class="t-total">/ 03</span></div>
+                <div class="t-body">
+                  <p class="t-quote">&ldquo;Herramientas poderosas para todos, no solo para quien puede pagarlas.&rdquo;</p>
+                  <div class="t-author-row"><span class="t-brand">ConcentricLab</span><span class="t-source">Manifiesto del lab</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="slider-arrows">
+            <button class="slider-arrow" id="t-prev" aria-label="Anterior">&#8592;</button>
+            <button class="slider-arrow" id="t-next" aria-label="Siguiente">&#8594;</button>
+          </div>
+        </div>
+        <div class="slider-dots" style="margin-top:14px">
+          <button class="slider-dot active" data-index="0"></button>
+          <button class="slider-dot" data-index="1"></button>
+          <button class="slider-dot" data-index="2"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     PRODUCTOS
+══════════════════════════════════════════════ -->
+<section id="productos">
+  <div class="productos-inner">
+    <div>
+      <p class="reveal" data-i18n="productos" style="font-size:13px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px">(Productos)</p>
+      <div class="reveal reveal-delay-1"><span class="gradient-title-alt">Lo que hemos construido</span></div>
+    </div>
+
+    <div class="products-grid reveal">
+
+      <!-- Producto 1 — Kit de métricas -->
+      <div class="product-card">
+        <img src="assets/images/producto-1.png" alt="Kit de métricas digitales" class="product-thumb" loading="lazy">
+        <div class="product-body">
+          <span class="product-type notion">Plantilla Notion</span>
+          <h3 class="product-title">Kit de métricas digitales</h3>
+          <p class="product-desc">Trackea alcance, ingresos, conversión y crecimiento. Todo desde Notion, sin hojas de cálculo dispersas.</p>
+          <div class="product-footer">
+            <span class="product-price">Gratis / Gumroad</span>
+            <a href="https://concentriclab.gumroad.com/l/metricasdigitales" target="_blank" rel="noopener" class="product-btn">
+              <img src="assets/images/gumroad-icon.svg" alt="">
+              Obtener
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Próximamente 1 -->
+      <div class="product-card coming-soon">
+        <div class="product-thumb" style="background:linear-gradient(135deg,rgba(91,99,245,.15),rgba(244,132,95,.1));display:flex;align-items:center;justify-content:center">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="1.2"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/></svg>
+        </div>
+        <span class="cs-badge">Próximamente</span>
+        <div class="product-body">
+          <span class="product-type">Automatización</span>
+          <h3 class="product-title">Blueprint Make / n8n</h3>
+          <p class="product-desc">Flujos de automatización listos para importar. Publica en redes, sincroniza datos, gestiona clientes — sin código.</p>
+          <div class="product-footer">
+            <span class="product-price" style="color:rgba(255,255,255,.3)">En desarrollo</span>
+            <span class="product-coming">Notificarme</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Próximamente 2 -->
+      <div class="product-card coming-soon">
+        <div class="product-thumb" style="background:linear-gradient(135deg,rgba(255,144,232,.12),rgba(91,99,245,.1));display:flex;align-items:center;justify-content:center">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="1.2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <span class="cs-badge">Próximamente</span>
+        <div class="product-body">
+          <span class="product-type">Kit UI · Figma</span>
+          <h3 class="product-title">UI Kit para startups</h3>
+          <p class="product-desc">Componentes, tokens y sistema de diseño listo para lanzar productos digitales rápido sin empezar desde cero.</p>
+          <div class="product-footer">
+            <span class="product-price" style="color:rgba(255,255,255,.3)">En desarrollo</span>
+            <span class="product-coming">Notificarme</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     YOUTUBE / CONTENIDO
+══════════════════════════════════════════════ -->
+<section id="contenido">
+  <div class="yt-inner">
+    <div>
+      <p class="reveal" data-i18n="contenido" style="font-size:13px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px">(Contenido)</p>
+      <div class="reveal reveal-delay-1"><span class="gradient-title-alt">Lo que estamos creando</span></div>
+    </div>
+
+    <a href="https://www.youtube.com/@ConcentricLab" target="_blank" rel="noopener" class="yt-card reveal" aria-label="Ver canal de YouTube">
+      <div class="yt-thumb">
+        <img src="assets/images/yt-thumbnail.png" alt="UX Design Is Not Dead in 2026" loading="lazy">
+        <div class="yt-play">
+          <div class="yt-play-btn">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="rgb(255,0,0)"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          </div>
+        </div>
+        <span class="yt-lang-badge" lang="en">EN</span>
+      </div>
+      <div class="yt-content">
+        <div class="yt-meta">
+          <span class="yt-channel">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M10 15.5v-7l6 3.5-6 3.5z"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+            ConcentricLab · YouTube
+          </span>
+          <h3 class="yt-title" lang="en">UX Design Is Not Dead in 2026</h3>
+          <p class="yt-desc">The tools, the systems and the thinking that keep UX relevant — and why combining design with AI is the real skill to develop right now.</p>
+        </div>
+        <a href="https://www.youtube.com/@ConcentricLab" target="_blank" rel="noopener" class="yt-cta" onclick="event.stopPropagation()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M10 15.5v-7l6 3.5-6 3.5z"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+          Suscribirse al canal
+        </a>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     STACK
+══════════════════════════════════════════════ -->
+<section id="stack">
+  <div class="stack-inner">
+    <div>
+      <p class="reveal" data-i18n="stack" style="font-size:13px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px">(Herramientas)</p>
+      <div class="reveal reveal-delay-1">
+        <span class="gradient-title-alt" style="font-size:clamp(24px,4vw,48px)">Nuestro stack</span>
+      </div>
+    </div>
+    <div class="stack-grid reveal">
+      <div class="stack-item">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png" alt="Notion" class="stack-icon" loading="lazy">
+        <span class="stack-name">Notion</span>
+        <span class="stack-use">Templates & sistemas</span>
+      </div>
+      <div class="stack-item">
+        <img src="assets/images/logo.png" alt="Framer" class="stack-icon" loading="lazy" style="background:rgb(19,19,19)">
+        <span class="stack-name">Framer</span>
+        <span class="stack-use">Diseño web</span>
+      </div>
+      <div class="stack-item">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg" alt="Figma" class="stack-icon" loading="lazy">
+        <span class="stack-name">Figma</span>
+        <span class="stack-use">UI & prototipos</span>
+      </div>
+      <div class="stack-item">
+        <img src="https://images.ctfassets.net/p2f2g8mz07u6/5RqVpTfGO6R2AkOhkfuLOW/6af2c9a96898f516b41c3e25e9fdc89e/make-logo.png" alt="Make" class="stack-icon" loading="lazy">
+        <span class="stack-name">Make</span>
+        <span class="stack-use">Automatizaciones</span>
+      </div>
+      <div class="stack-item">
+        <img src="https://n8n.io/favicon.ico" alt="n8n" class="stack-icon" loading="lazy">
+        <span class="stack-name">n8n</span>
+        <span class="stack-use">Workflows</span>
+      </div>
+      <div class="stack-item">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" alt="ChatGPT" class="stack-icon" loading="lazy">
+        <span class="stack-name">ChatGPT</span>
+        <span class="stack-use">IA generativa</span>
+      </div>
+      <div class="stack-item">
+        <img src="assets/images/gumroad-icon.svg" alt="Gumroad" class="stack-icon" loading="lazy">
+        <span class="stack-name">Gumroad</span>
+        <span class="stack-use">Distribución digital</span>
+      </div>
+      <div class="stack-item">
+        <img src="https://cdn.worldvectorlogo.com/logos/adobe-illustrator-cc-icon.svg" alt="Illustrator" class="stack-icon" loading="lazy">
+        <span class="stack-name">Illustrator</span>
+        <span class="stack-use">Branding & vectores</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     NEWSLETTER
+══════════════════════════════════════════════ -->
+<section id="newsletter">
+  <div class="nl-inner">
+    <div class="nl-card reveal">
+      <div class="nl-text">
+        <h2 class="nl-title" data-i18n="newsletter_title">Recursos gratis, directo a tu bandeja.</h2>
+        <p class="nl-sub" data-i18n="newsletter_sub">Templates, automatizaciones y recursos de diseño UX — todo lo que construimos, primero para quienes se suscriben.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px;flex:1;max-width:420px">
+        <!--
+          TODO NEWSLETTER: Sigue estos 3 pasos:
+          1. Ve a https://formspree.io y crea una cuenta gratuita
+          2. Crea un nuevo formulario, copia tu Form ID (luce así: xrgwabcd)
+          3. Reemplaza FORMSPREE_ID_AQUI en el atributo data-endpoint abajo
+        -->
+        <form class="nl-form" id="nl-form" data-endpoint="https://formspree.io/f/FORMSPREE_ID_AQUI">
+          <input type="email" name="email" class="nl-input" placeholder="tu@email.com" required aria-label="Tu email">
+          <button type="submit" class="nl-btn" id="nl-btn" data-i18n="newsletter_btn">Suscribirme</button>
+        </form>
+        <p class="nl-note">Sin spam. Darte de baja cuando quieras.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     CONTACT
+══════════════════════════════════════════════ -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="reveal">
+      <h2 class="contact-heading" data-i18n="contact_head">Contáctanos</h2>
+    </div>
+    <div class="contact-card reveal">
+      <img src="assets/images/contact-bg.png" alt="" class="contact-bg" loading="lazy">
+      <div class="contact-overlay"></div>
+      <div class="contact-content">
+        <div class="contact-left">
+          <h3 class="contact-title" data-i18n="contact_title">¿Tienes algo en mente?</h3>
+          <p class="contact-sub" data-i18n="contact_sub">Cuéntanos de qué se trata, respondemos cuando podamos.</p>
+          <div class="contact-social">
+            <a href="https://www.instagram.com/concentriclab" target="_blank" rel="noopener">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+              Instagram
+            </a>
+            <a href="https://www.linkedin.com/company/concentriclab/" target="_blank" rel="noopener">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              LinkedIn
+            </a>
+          </div>
+        </div>
+        <div>
+          <iframe data-tally-src="https://tally.so/embed/J9La5z?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+            loading="lazy" width="100%" height="380" frameborder="0"
+            marginheight="0" marginwidth="0" class="tally-frame"
+            title="Formulario de contacto"></iframe>
+        </div>
+      </div>
+    </div>
+    <div class="contact-ticker" aria-hidden="true">
+      <div class="contact-ticker-track">
+        <span class="c-tag">Diseño UX/UI</span><span class="c-tag">Automatización</span>
+        <span class="c-tag">IA Generativa</span><span class="c-tag">Sistemas digitales</span>
+        <span class="c-tag">Plantillas Notion</span><span class="c-tag">Branding</span>
+        <span class="c-tag">Métricas</span><span class="c-tag">Founders</span>
+        <span class="c-tag">Creators</span><span class="c-tag">LATAM</span>
+        <span class="c-tag">Make · n8n</span><span class="c-tag">Diseño Industrial</span>
+        <span class="c-tag">Diseño UX/UI</span><span class="c-tag">Automatización</span>
+        <span class="c-tag">IA Generativa</span><span class="c-tag">Sistemas digitales</span>
+        <span class="c-tag">Plantillas Notion</span><span class="c-tag">Branding</span>
+        <span class="c-tag">Métricas</span><span class="c-tag">Founders</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════════ -->
+<footer>
+  <div class="footer-card">
+    <img src="assets/images/footer-bg.jpeg" alt="" class="footer-bg" loading="lazy">
+    <div class="footer-overlay"></div>
+    <div class="footer-content">
+      <div class="footer-top">
+        <div class="footer-col">
+          <span class="footer-col-title">Navegación</span>
+          <nav class="footer-links">
+            <a href="#productos">Productos</a>
+            <a href="#enfoque">Enfoque</a>
+            <a href="#filosofia">Manifiesto</a>
+            <a href="#contenido">Contenido</a>
+            <a href="#stack">Stack</a>
+          </nav>
+        </div>
+        <div class="footer-col">
+          <span class="footer-col-title">Social</span>
+          <nav class="footer-links">
+            <a href="https://www.youtube.com/@ConcentricLab" target="_blank" rel="noopener">YouTube</a>
+            <a href="https://www.instagram.com/concentriclab" target="_blank" rel="noopener">Instagram</a>
+            <a href="https://www.linkedin.com/company/concentriclab/" target="_blank" rel="noopener">LinkedIn</a>
+          </nav>
+        </div>
+        <div class="footer-col">
+          <span class="footer-col-title">Productos</span>
+          <nav class="footer-links">
+            <a href="https://concentriclab.gumroad.com/l/metricasdigitales" target="_blank" rel="noopener">Kit de métricas</a>
+            <a href="https://concentriclab.gumroad.com" target="_blank" rel="noopener">Ver todos →</a>
+          </nav>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <img src="assets/images/logo.png" alt="Concentric Lab" class="footer-logo">
+        <p class="footer-copy">&copy; 2026 Concentric Lab. Bogotá, Colombia.</p>
+        <p class="footer-ai-note">Construido con diseño, IA y mucho café.</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  /* Tally */
+  (function(){var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach(function(e){e.src=e.dataset.tallySrc})};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w;s.onload=v;s.onerror=v;d.body.appendChild(s);}})();
+
+  /* Progress bar */
+  var prog=document.getElementById("progress");
+  window.addEventListener("scroll",function(){var s=document.documentElement.scrollTop,h=document.documentElement.scrollHeight-document.documentElement.clientHeight;prog.style.width=(s/h*100)+"%";},{passive:true});
+
+  /* Reveal on scroll */
+  var io=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}});},{threshold:0.1,rootMargin:"0px 0px -40px 0px"});
+  document.querySelectorAll(".reveal").forEach(function(el){io.observe(el)});
+
+  /* Slider */
+  var track=document.getElementById("t-track"),dots=document.querySelectorAll(".slider-dot"),cur=0,total=3;
+  function goTo(i){cur=(i+total)%total;track.style.transform="translateX(-"+cur*100+"%)";dots.forEach(function(d,idx){d.classList.toggle("active",idx===cur)});}
+  document.getElementById("t-next").addEventListener("click",function(){goTo(cur+1)});
+  document.getElementById("t-prev").addEventListener("click",function(){goTo(cur-1)});
+  dots.forEach(function(d){d.addEventListener("click",function(){goTo(parseInt(d.dataset.index,10))})});
+  setInterval(function(){goTo(cur+1)},5500);
+  /* Touch */
+  var ts=0,sliderEl=document.getElementById("testimonial-slider");
+  sliderEl.addEventListener("touchstart",function(e){ts=e.changedTouches[0].screenX},{passive:true});
+  sliderEl.addEventListener("touchend",function(e){var dx=ts-e.changedTouches[0].screenX;if(Math.abs(dx)>50)goTo(dx>0?cur+1:cur-1);},{passive:true});
+
+  /* Mobile menu */
+  var menu=document.getElementById("mobile-menu"),ham=document.getElementById("hamburger"),mc=document.getElementById("mob-close");
+  ham.addEventListener("click",function(){menu.classList.add("open");ham.setAttribute("aria-expanded","true");document.body.style.overflow="hidden"});
+  mc.addEventListener("click",function(){menu.classList.remove("open");ham.setAttribute("aria-expanded","false");document.body.style.overflow=""});
+  menu.querySelectorAll("a").forEach(function(a){a.addEventListener("click",function(){menu.classList.remove("open");document.body.style.overflow=""})});
+
+  /* Header shadow */
+  window.addEventListener("scroll",function(){document.getElementById("site-header").style.boxShadow=window.scrollY>40?"0 2px 24px rgba(0,0,0,.08)":"none";},{passive:true});
+})();
+
+
+  var dict = {
+    es: {
+      nav_products:'Productos', nav_focus:'Enfoque', nav_manifesto:'Manifiesto', nav_content:'Contenido', nav_contact:'Contacto', nav_cta:'Ver plantillas',
+      hero_label:'Laboratorio digital', hero_sub:'Combinamos UX, inteligencia artificial y automatización para construir mejores experiencias digitales — sin perder lo humano.', hero_secondary:'Ver contenido',
+      focus_text:'Construimos desde el núcleo hacia afuera — del usuario al sistema, del problema a la solución — combinando diseño, IA y automatización.',
+      hero_btn_primary:'Ver plantillas', hero_btn_secondary:'Ver contenido',
+      productos:'(Productos)', contenido:'(Contenido)', stack:'(Herramientas)', newsletter_title:'Recursos gratis, directo a tu bandeja.',
+      newsletter_sub:'Templates, automatizaciones y recursos de diseño UX — todo lo que construimos, primero para quienes se suscriben.', newsletter_btn:'Suscribirme',
+      contact_sub:'Cuéntanos de qué se trata, respondemos cuando podamos.', contact_title:'¿Tienes algo en mente?', contact_head:'Contáctanos'
+    },
+    en: {
+      nav_products:'Products', nav_focus:'Focus', nav_manifesto:'Manifesto', nav_content:'Content', nav_contact:'Contact', nav_cta:'See templates',
+      hero_label:'Digital lab', hero_sub:'We combine UX, AI and automation to build better digital experiences — without losing the human side.', hero_secondary:'Watch content',
+      focus_text:'We build from the core outward — from the user to the system, from problem to solution — combining design, AI and automation.',
+      hero_btn_primary:'See templates', hero_btn_secondary:'Watch content',
+      productos:'(Products)', contenido:'(Content)', stack:'(Tools)', newsletter_title:'Free resources, straight to your inbox.',
+      newsletter_sub:'Templates, automations and UX resources — everything we build, first for subscribers.', newsletter_btn:'Join the list',
+      contact_sub:'Tell us what it is about, we reply when we can.', contact_title:'Got something in mind?', contact_head:'Contact'
+    }
+  };
+  function setLang(lang){
+    document.documentElement.lang = lang === 'en' ? 'en' : 'es-CO';
+    localStorage.setItem('cl_lang', lang);
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var key = el.getAttribute('data-i18n');
+      if(dict[lang] && dict[lang][key]) el.textContent = dict[lang][key];
+    });
+    document.getElementById('lang-toggle').textContent = lang === 'en' ? 'EN' : 'ES';
+  }
+  function applyPreferredLanguage(){
+    var saved = localStorage.getItem('cl_lang');
+    if(saved){ setLang(saved); return; }
+    var nav = (navigator.language || '').toLowerCase();
+    setLang(nav.startsWith('en') ? 'en' : 'es');
+  }
+  var themeToggle = document.getElementById('theme-toggle');
+  var langToggle = document.getElementById('lang-toggle');
+  function setTheme(theme){
+    document.body.classList.toggle('dark', theme === 'dark');
+    localStorage.setItem('cl_theme', theme);
+    themeToggle.textContent = theme === 'dark' ? '☀' : '◐';
+  }
+  var savedTheme = localStorage.getItem('cl_theme');
+  var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  setTheme(savedTheme || (prefersDark ? 'dark' : 'light'));
+  themeToggle.addEventListener('click', function(){ setTheme(document.body.classList.contains('dark') ? 'light' : 'dark'); });
+  langToggle.addEventListener('click', function(){ setLang(localStorage.getItem('cl_lang') === 'en' ? 'es' : 'en'); });
+  applyPreferredLanguage();
+
+
+/* Focus text scroll color */
+  window.addEventListener("scroll",function(){
+    var focusText = document.querySelector("#enfoque .enfoque-text");
+    if(!focusText) return;
+    if(window.scrollY > 200){
+      focusText.classList.add("scrolled");
+    } else {
+      focusText.classList.remove("scrolled");
+    }
+  },{passive:true});
+
+
+/* Newsletter — envío AJAX a Formspree (sin recarga de página) */
+(function(){
+  var form = document.getElementById('nl-form');
+  if(!form) return;
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var btn = document.getElementById('nl-btn');
+    var endpoint = form.getAttribute('data-endpoint');
+    if(!endpoint || endpoint.includes('FORMSPREE_ID_AQUI')){
+      btn.textContent = '⚠ Configura Formspree primero';
+      btn.style.background = '#FF6D4D';
+      setTimeout(function(){ btn.textContent = 'Suscribirme'; btn.style.background = ''; }, 3000);
+      return;
+    }
+    btn.textContent = 'Enviando…';
+    btn.disabled = true;
+    fetch(endpoint, {
+      method: 'POST',
+      headers: {'Accept':'application/json','Content-Type':'application/json'},
+      body: JSON.stringify({email: form.querySelector('input[type=email]').value})
+    })
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+      if(data.ok){
+        btn.textContent = '¡Listo! ✓';
+        btn.style.background = '#61c554';
+        form.reset();
+        setTimeout(function(){ btn.textContent = 'Suscribirme'; btn.style.background = ''; btn.disabled = false; }, 4000);
+      } else {
+        throw new Error('error');
+      }
+    })
+    .catch(function(){
+      btn.textContent = 'Intenta de nuevo';
+      btn.style.background = '#FF6D4D';
+      btn.disabled = false;
+      setTimeout(function(){ btn.textContent = 'Suscribirme'; btn.style.background = ''; }, 3000);
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
