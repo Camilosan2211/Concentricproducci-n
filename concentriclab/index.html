@@ -40,24 +40,6 @@
   ],
   "offers":{"@type":"Offer","name":"Kit de métricas digitales","url":"https://concentriclab.gumroad.com/l/metricasdigitales"}
 }
-
-/* Cursor morphing */
-if(window.matchMedia("(pointer:fine)").matches){
-  const cur = document.createElement("div");
-  cur.className = "cl-cursor";
-  document.body.appendChild(cur);
-  document.addEventListener("mousemove",e=>{
-    cur.style.left = e.clientX+"px";
-    cur.style.top = e.clientY+"px";
-  });
-  document.querySelectorAll("a,button,[data-cursor],.enfoque-tag,.product-card,.stack-item,.nav-cta").forEach(el=>{
-    el.addEventListener("mouseenter",()=>cur.classList.add("hover"));
-    el.addEventListener("mouseleave",()=>cur.classList.remove("hover","click"));
-  });
-  document.addEventListener("mousedown",()=>cur.classList.add("click"));
-  document.addEventListener("mouseup",()=>cur.classList.remove("click"));
-}
-
 </script>
 
 <style>
@@ -289,6 +271,7 @@ header{
 }
 .enfoque-tag:hover{transform:translateY(-6px) scale(1.04) rotate(0) !important;box-shadow:0 12px 32px rgba(91,99,245,.4)}
 
+.enfoque-tag:hover{transform:translateY(-2px)}
 .enfoque-tag svg{opacity:.64}
 
 /* ══════════════════════════════════════════════════
@@ -595,89 +578,36 @@ footer{padding:8px;margin-top:clamp(20px,3vw,40px)}
   .stack-grid{grid-template-columns:repeat(3,1fr)}
 }
 
-/* Cursor morphing */
+/* ── CURSOR MORPHING (solo desktop con mouse) ────── */
 @media(pointer:fine){
   *{cursor:none!important}
-  .cl-cursor{position:fixed;width:10px;height:10px;background:var(--blue);border-radius:50%;pointer-events:none;z-index:999999;transform:translate(-50%,-50%);transition:width .18s,height .18s,border-radius .18s,background .18s,transform .12s cubic-bezier(0.34,1.56,0.64,1);mix-blend-mode:difference}
+  .cl-cursor{
+    position:fixed;width:10px;height:10px;
+    background:var(--blue);border-radius:50%;
+    pointer-events:none;z-index:999999;
+    transform:translate(-50%,-50%);
+    transition:width .18s,height .18s,border-radius .18s,background .18s,transform .12s cubic-bezier(0.34,1.56,0.64,1);
+    mix-blend-mode:difference;
+  }
   .cl-cursor.hover{width:28px;height:28px;border-radius:6px;background:var(--salmon)}
   .cl-cursor.click{transform:translate(-50%,-50%) scale(.7)}
 }
 
+@keyframes quoteSlide{
+  from{opacity:0;transform:translateY(24px)}
+  to{opacity:1;transform:none}
+}
+
+/* ── FILOSOFIA SINGLE LAYOUT ────────────────────── */
+.filosofia-single{display:flex;flex-direction:column;gap:44px}
+.filosofia-single-top{display:flex;flex-direction:column}
+.filosofia-single-bottom{display:flex;flex-direction:column;gap:40px}
+.filosofia-quote{opacity:1;transform:none} /* overridden by inline animation */
 </style>
 </head>
 <body>
-<!-- ═══════════════════════════════════════════════════════
-     ASSETS LOCALES — ESTRUCTURA DE CARPETAS PARA GITHUB
 
-     Crea esta estructura en tu repositorio:
-
-     concentriclab/
-     ├── index.html
-     └── assets/
-         ├── images/
-         │   ├── logo.png
-         │   ├── favicon.png
-         │   ├── og-image.png
-         │   ├── hero-1.jpeg
-         │   ├── hero-2.jpeg
-         │   ├── hero-3.jpeg
-         │   ├── enfoque-label.png
-         │   ├── producto-1.png
-         │   ├── principio-1.jpeg
-         │   ├── principio-2.jpeg
-         │   ├── principio-3.jpeg
-         │   ├── yt-thumbnail.png
-         │   ├── contact-bg.png
-         │   ├── footer-bg.jpeg
-         │   └── gumroad-icon.svg
-         └── video/
-             └── stats-bg.mp4
-
-     URLs originales de Framer (descarga cada una):
-
-     stats-bg.mp4                   ← assets/videos/stats-bg.mp4
-     og-image.png                   ← assets/images/og-image.png
-     contact-bg.png                 ← assets/images/contact-bg.webp
-     hero-3.jpeg                    ← assets/images/hero-3.webp
-     principio-3.jpeg               ← assets/images/principio-3.webp
-     gumroad-icon.svg               ← assets/images/gumroad-icon.svg
-     hero-2.jpeg                    ← assets/images/hero-2.webp
-     producto-1.png                 ← assets/images/producto-1.webp
-     principio-2.jpeg               ← assets/images/principio-2.webp
-     enfoque-label.png              ← assets/images/enfoque-label.webp
-     yt-thumbnail.png               ← assets/images/yt-thumbnail.webp
-     footer-bg.jpeg                 ← assets/images/footer-bg.webp
-     logo.png                       ← assets/images/logo.png
-     favicon.png                    ← assets/images/favicon.png
-     hero-1.jpeg                    ← assets/images/hero-1.webp
-     principio-1.jpeg               ← assets/images/principio-1.webp
-══════════════════════════════════════════════════════ -->
-
-
-<!--
-  ════════════════════════════════════════════════════════════════════
-  ⚠️  IMÁGENES ALOJADAS EN FRAMER CDN — ACCIÓN PENDIENTE
-  ════════════════════════════════════════════════════════════════════
-  Varias imágenes y el video de fondo cargan desde framerusercontent.com.
-  Esto funciona ahora, pero puede romperse si tu proyecto en Framer
-  se elimina o cambia. Antes de lanzar en producción:
-
-  1. Descarga cada imagen desde las URLs framerusercontent.com
-  2. Crea una carpeta /assets/img/ en tu repositorio de GitHub
-  3. Sube las imágenes ahí y reemplaza las URLs en este archivo
-
-  Las imágenes críticas a reemplazar son:
-  — Logo:        framerusercontent.com/images/hd58yXIN4R47jxZgWD19awres.png
-  — Hero foto 1: framerusercontent.com/images/rf2SDv1XBDB2J8J0Jc5rCqcm2U.jpeg
-  — Hero foto 2: framerusercontent.com/images/9uAvGuD7oMUyJdcTr62h13V7mjU.jpeg
-  — Hero foto 3: framerusercontent.com/images/4MKLmJBsDVZK97JDWqkAa17N3RU.jpeg
-  — Producto:    framerusercontent.com/images/BYbTfLPwKrQ8KDoRNlrCPLZwoj0.png
-  — Video bg:    framerusercontent.com/assets/videos/stats-bg.mp4
-  — YT thumb:    framerusercontent.com/images/YcYECqqfP3DEf1qBy7Ldk27rqbU.png
-  — Contact bg:  framerusercontent.com/images/1sREGvYWbdhqXmijCOMUIsD7A.png
-  — Footer bg:   framerusercontent.com/images/eHn2ObLmY2s5f30XS3PFk7Pnv4.jpeg
-  ════════════════════════════════════════════════════════════════════
--->
+<!-- ✅ Assets migrados a /assets/images/ y /assets/videos/ -->
 <div id="progress"></div>
 
 <!-- MOBILE MENU -->
@@ -1032,7 +962,7 @@ footer{padding:8px;margin-top:clamp(20px,3vw,40px)}
         <span class="stack-use">Templates & sistemas</span>
       </div>
       <div class="stack-item">
-        <img src="assets/images/logo.png" alt="Framer" class="stack-icon" loading="lazy" style="background:rgb(19,19,19)">
+        <img src="https://framer.com/images/favicons/favicon.png" alt="Framer" class="stack-icon" loading="lazy" style="background:rgb(19,19,19)">
         <span class="stack-name">Framer</span>
         <span class="stack-use">Diseño web</span>
       </div>
@@ -1330,6 +1260,23 @@ footer{padding:8px;margin-top:clamp(20px,3vw,40px)}
     });
   });
 })();
+
+/* Cursor morphing — solo en dispositivos con mouse fino */
+if(window.matchMedia("(pointer:fine)").matches){
+  var cur = document.createElement("div");
+  cur.className = "cl-cursor";
+  document.body.appendChild(cur);
+  document.addEventListener("mousemove",function(e){
+    cur.style.left = e.clientX+"px";
+    cur.style.top = e.clientY+"px";
+  });
+  document.querySelectorAll("a,button,.enfoque-tag,.product-card,.stack-item,.nav-cta").forEach(function(el){
+    el.addEventListener("mouseenter",function(){cur.classList.add("hover")});
+    el.addEventListener("mouseleave",function(){cur.classList.remove("hover","click")});
+  });
+  document.addEventListener("mousedown",function(){cur.classList.add("click")});
+  document.addEventListener("mouseup",function(){cur.classList.remove("click")});
+}
 </script>
 
 </body>
