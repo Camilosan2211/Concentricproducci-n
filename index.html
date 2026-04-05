@@ -18,12 +18,9 @@
 <link rel="canonical" href="https://concentriclab.netlify.app/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- Inter desde Google Fonts (confiable, siempre disponible) -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-<!-- Cal Sans desde jsDelivr/fontsource (fuente de Cal.com, no está en Google Fonts) -->
 <link href="https://cdn.jsdelivr.net/npm/@fontsource/cal-sans/index.css" rel="stylesheet">
 
-<!-- JSON-LD Structured Data -->
 <script type="application/ld+json">
 {
   "@context":"https://schema.org",
@@ -76,8 +73,10 @@ body.dark{
   --bg-dark-section:rgb(5,5,9);
   --text-dark:rgb(238,238,245);
   --text-muted:rgba(255,255,255,.48);
-  background:var(--bg);color:var(--text-dark)
+  background:var(--bg);
+  color:var(--text-dark);
 }
+/* FIX: Removed duplicate body.dark .nav-ghost — se unifica aquí */
 body.dark .nav-ghost{background:rgba(255,255,255,.07);color:var(--white);border-color:rgba(255,255,255,.11)}
 img,video{display:block;max-width:100%}
 a{text-decoration:none;color:inherit}
@@ -94,6 +93,39 @@ button{cursor:pointer;font-family:inherit;border:none;background:none}
 
 /* ── PROGRESS ── */
 #progress{position:fixed;top:0;left:0;height:2.5px;width:0;background:linear-gradient(90deg,var(--blue),var(--pink),var(--orange));z-index:9999;pointer-events:none;border-radius:0 2px 2px 0}
+
+/* FIX: CSS para el cursor personalizado — faltaba por completo */
+.cl-dot{
+  position:fixed;
+  width:6px;height:6px;
+  background:var(--blue);
+  border-radius:50%;
+  pointer-events:none;
+  transform:translate(-50%,-50%);
+  z-index:10000;
+  transition:width .15s,height .15s,background .2s,opacity .3s;
+  will-change:left,top;
+}
+.cl-ring{
+  position:fixed;
+  width:32px;height:32px;
+  border:1.5px solid rgba(80,90,245,.5);
+  border-radius:50%;
+  pointer-events:none;
+  transform:translate(-50%,-50%);
+  z-index:9999;
+  transition:
+    opacity .3s,
+    width .22s cubic-bezier(0.34,1.56,0.64,1),
+    height .22s cubic-bezier(0.34,1.56,0.64,1),
+    border-radius .22s,
+    border-color .2s;
+  will-change:left,top;
+}
+.cl-ring.hover{width:44px;height:44px;border-color:rgba(80,90,245,.35)}
+.cl-ring.link-hover{border-radius:6px;border-color:rgba(80,90,245,.4)}
+.cl-dot.click{width:4px;height:4px}
+.cl-ring.click{width:24px;height:24px}
 
 /* ═══════ HEADER ═══════ */
 header{position:fixed;top:0;left:0;width:100%;z-index:100;background:var(--bg);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);display:flex;flex-direction:column;align-items:center;transition:box-shadow .3s,background .35s}
@@ -114,7 +146,6 @@ body.dark header{background:rgba(9,9,13,.92)}
 .nav-cta:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(80,90,245,.5);background:rgb(70,80,235)}
 .nav-ghost{background:rgba(19,19,19,.06);color:var(--text-dark);border:1px solid rgba(19,19,19,.09);border-radius:50px;padding:8px 14px;font-size:13px;font-weight:600;transition:background .2s,transform .2s}
 .nav-ghost:hover{background:rgba(19,19,19,.12);transform:translateY(-1px)}
-body.dark .nav-ghost{background:rgba(255,255,255,.07);color:var(--white);border-color:rgba(255,255,255,.12)}
 .nav-hamburger{display:none;flex-direction:column;gap:5px;padding:6px}
 .nav-hamburger span{display:block;width:22px;height:2px;background:var(--text-dark);border-radius:2px;transition:all .3s}
 #mobile-menu{display:none;position:fixed;inset:0;background:var(--bg);z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:36px}
@@ -125,7 +156,6 @@ body.dark .nav-ghost{background:rgba(255,255,255,.07);color:var(--white);border-
 
 /* ═══════ HERO ═══════ */
 #hero{min-height:100vh;padding-top:130px;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden}
-/* Blobs animados de fondo */
 #hero::before{content:"";position:absolute;top:-10%;left:-10%;width:60%;height:80%;background:radial-gradient(ellipse,rgba(80,90,245,.1) 0%,transparent 65%);animation:blobFloat 8s ease-in-out infinite alternate;pointer-events:none}
 #hero::after{content:"";position:absolute;bottom:0%;right:-5%;width:50%;height:60%;background:radial-gradient(ellipse,rgba(244,120,85,.09) 0%,transparent 65%);animation:blobFloat 10s ease-in-out infinite alternate-reverse;pointer-events:none}
 @keyframes blobFloat{0%{transform:translate(0,0) scale(1)}100%{transform:translate(3%,4%) scale(1.06)}}
@@ -188,7 +218,6 @@ body.dark #enfoque .enfoque-text.scrolled{color:rgb(238,238,245)}
 #filosofia{background:var(--bg-dark-section);padding:var(--gap) var(--pad);position:relative;overflow:hidden}
 #filosofia::before{content:"";position:absolute;top:0;left:0;right:0;height:1.5px;background:linear-gradient(90deg,transparent 0%,var(--blue) 30%,var(--pink) 60%,var(--orange) 80%,transparent 100%);opacity:.55}
 #filosofia::after{content:"";position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(80,90,245,.3),transparent)}
-/* Blob de color dentro de filosofia */
 #filosofia .filo-blob{position:absolute;bottom:-60px;right:-80px;width:400px;height:400px;background:radial-gradient(ellipse,rgba(80,90,245,.12) 0%,transparent 65%);pointer-events:none;animation:blobFloat 11s ease-in-out infinite alternate}
 .filosofia-inner{max-width:var(--max-w);margin:0 auto;display:flex;flex-direction:column;gap:10px;position:relative;z-index:1}
 .filosofia-label{font-size:11px;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:.1em;font-weight:600}
@@ -221,7 +250,7 @@ body.dark #enfoque .enfoque-text.scrolled{color:rgb(238,238,245)}
 .lab-p-arrow:hover{background:rgba(80,90,245,.3);color:var(--white)}
 .lab-p-dots{display:flex;gap:5px;align-items:center}
 .lab-p-dot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.16);border:none;cursor:pointer;transition:background .25s,transform .25s,width .3s}
-.lab-p-dot.active{background:var(--blue-lt);transform:scale(1.4);width:16px;border-radius:3px}
+.lab-p-dot.active{background:linear-gradient(135deg,var(--blue),var(--pink));transform:scale(1.4);width:16px;border-radius:3px}
 
 /* ═══════ PRODUCTOS ═══════ */
 #productos{padding:var(--gap) var(--pad);position:relative;overflow:hidden}
@@ -282,9 +311,8 @@ body.dark .stack-item:hover{background:rgba(255,255,255,.08);border-color:rgba(1
 .stack-icon{width:26px;height:26px;border-radius:8px;object-fit:contain;background:var(--white);padding:3px;flex-shrink:0;box-shadow:0 1px 4px rgba(0,0,0,.1)}
 .stack-name{font-size:13px;font-weight:600;color:var(--text-dark)}
 body.dark .stack-name{color:var(--white)}
-.stack-use{display:none}
 
-/* ═══════ CONNECT (fusionado) ═══════ */
+/* ═══════ CONNECT ═══════ */
 #connect{padding:var(--gap) var(--pad);position:relative;overflow:hidden}
 #connect::before{content:"";position:absolute;right:-100px;top:-50px;width:500px;height:500px;background:radial-gradient(ellipse,rgba(80,90,245,.08) 0%,transparent 65%);pointer-events:none;animation:blobFloat 10s ease-in-out infinite alternate}
 .connect-inner{max-width:var(--max-w);margin:0 auto;display:flex;flex-direction:column;gap:16px;position:relative}
@@ -294,7 +322,6 @@ body.dark .stack-name{color:var(--white)}
 body.dark .connect-title{color:var(--white)}
 .connect-title span{background:linear-gradient(135deg,var(--blue),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .connect-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:stretch}
-/* Newsletter */
 .connect-nl{background:rgba(80,90,245,.06);border:1px solid rgba(80,90,245,.16);border-radius:var(--r);padding:clamp(28px,4vw,44px);display:flex;flex-direction:column;gap:16px;position:relative;overflow:hidden;transition:border-color .3s,box-shadow .3s}
 .connect-nl:hover{border-color:rgba(80,90,245,.3);box-shadow:0 0 40px rgba(80,90,245,.08)}
 body.dark .connect-nl{background:rgba(80,90,245,.08);border-color:rgba(80,90,245,.22)}
@@ -311,7 +338,6 @@ body.dark .nl-input{background:rgba(255,255,255,.08);border-color:rgba(255,255,2
 .nl-btn{background:var(--blue);color:var(--white);border-radius:50px;padding:12px 26px;font-size:14px;font-weight:600;border:none;cursor:pointer;white-space:nowrap;box-shadow:0 4px 16px rgba(80,90,245,.38);transition:transform .2s,box-shadow .2s,background .2s}
 .nl-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(80,90,245,.5);background:rgb(70,80,235)}
 .nl-note{font-size:11px;color:var(--text-muted)}
-/* Contacto */
 .connect-contact{background:rgba(19,19,19,.03);border:1px solid rgba(19,19,19,.08);border-radius:var(--r);padding:clamp(28px,4vw,44px);display:flex;flex-direction:column;justify-content:space-between;gap:24px;transition:border-color .3s,box-shadow .3s}
 .connect-contact:hover{border-color:rgba(244,120,85,.25);box-shadow:0 0 40px rgba(244,120,85,.06)}
 body.dark .connect-contact{background:rgba(255,255,255,.025);border-color:rgba(255,255,255,.07)}
@@ -363,17 +389,12 @@ footer{padding:8px;margin-top:clamp(12px,2vw,28px)}
 }
 
 /* ═══════ ANIMACIONES EXTRAS ═══════ */
-/* Flotar contadores al entrar en viewport */
 @keyframes countUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 .lab-stat-row.in .lab-stat-num-sm{animation:countUp .6s cubic-bezier(.22,1,.36,1) forwards}
-
-/* Colored dot en los principios activo */
-.lab-p-dot.active{background:linear-gradient(135deg,var(--blue),var(--pink))}
 </style>
 </head>
 <body>
 
-<!-- ✅ Assets migrados a /assets/images/ y /assets/videos/ -->
 <div id="progress"></div>
 
 <!-- MOBILE MENU -->
@@ -383,7 +404,7 @@ footer{padding:8px;margin-top:clamp(12px,2vw,28px)}
   <a href="#enfoque" class="mob-link" data-i18n="nav_focus">Enfoque</a>
   <a href="#filosofia" class="mob-link" data-i18n="nav_manifesto">Manifiesto</a>
   <a href="#contenido" class="mob-link" data-i18n="nav_content">Contenido</a>
-  <a href="#contact" class="mob-link" data-i18n="nav_contact" style="color:var(--blue)">Contacto</a>
+  <a href="#connect" class="mob-link" data-i18n="nav_contact" style="color:var(--blue)">Contacto</a>
 </nav>
 
 <!-- ══════════════════════════════════════════════
@@ -391,11 +412,12 @@ footer{padding:8px;margin-top:clamp(12px,2vw,28px)}
 ══════════════════════════════════════════════ -->
 <header id="site-header">
   <div class="nav-notch">
-      <div class="dot"></div>
-      <span style="font-size:12px;color:var(--white);font-weight:500;letter-spacing:.02em">Trabajando en nuevos proyectos ✦</span>
+    <div class="dot"></div>
+    <span style="font-size:12px;color:var(--white);font-weight:500;letter-spacing:.02em">Trabajando en nuevos proyectos ✦</span>
   </div>
   <div class="nav-bar">
     <a href="#hero" aria-label="Inicio">
+      <!-- FIX: extensión corregida → .png (según README) -->
       <img src="assets/images/logo.png" alt="Concentric Lab" class="nav-logo">
     </a>
     <nav class="nav-links" aria-label="Principal">
@@ -407,9 +429,9 @@ footer{padding:8px;margin-top:clamp(12px,2vw,28px)}
     <div style="display:flex;align-items:center;gap:10px">
       <button class="nav-ghost" id="lang-toggle" type="button">ES</button>
       <button class="nav-ghost" id="theme-toggle" type="button" aria-label="Cambiar tema">
-  <svg id="icon-sun" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-  <svg id="icon-moon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-</button>
+        <svg id="icon-sun" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg id="icon-moon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
       <a href="#productos" class="nav-cta" data-i18n="nav_cta">Explorar</a>
     </div>
     <button class="nav-hamburger" id="hamburger" aria-label="Menú" aria-expanded="false">
@@ -469,7 +491,7 @@ footer{padding:8px;margin-top:clamp(12px,2vw,28px)}
     <span class="tag-pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/></svg>Diseño Industrial</span>
     <span class="tag-pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>Plantillas Notion</span>
     <span class="tag-pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8"/></svg>Sistemas digitales</span>
-    <!-- duplicate -->
+    <!-- duplicado para loop infinito -->
     <span class="tag-pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>Diseño UX/UI</span>
     <span class="tag-pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>IA Generativa</span>
     <span class="tag-pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>Branding</span>
@@ -522,14 +544,14 @@ footer{padding:8px;margin-top:clamp(12px,2vw,28px)}
 </section>
 
 <!-- ══════════════════════════════════════════════
-     LAB NOTES — stats + principios (compacto)
+     LAB NOTES — stats + principios
 ══════════════════════════════════════════════ -->
 <section id="lab-notes">
   <div class="lab-notes-inner">
     <p class="lab-notes-label reveal">Del laboratorio · manifiesto</p>
     <div class="lab-notes-grid reveal">
 
-      <!-- Stats compactos -->
+      <!-- Stats -->
       <div class="lab-stats-compact">
         <video class="lab-stats-video" src="assets/videos/stats-bg.mp4" autoplay muted loop playsinline></video>
         <div class="lab-stat-row">
@@ -546,7 +568,7 @@ footer{padding:8px;margin-top:clamp(12px,2vw,28px)}
         </div>
       </div>
 
-      <!-- Principios compactos -->
+      <!-- Principios slider -->
       <div class="lab-principios">
         <div class="lab-principios-track" id="lp-track">
           <div class="lab-principio-slide">
@@ -622,8 +644,9 @@ footer{padding:8px;margin-top:clamp(12px,2vw,28px)}
 
     <div class="products-grid reveal">
 
-      <!-- Producto 1 — Kit de métricas -->
+      <!-- Producto 1 -->
       <div class="product-card">
+        <!-- FIX: extensión correcta → .webp (archivo real en assets/images/) -->
         <img src="assets/images/producto-1.webp" alt="Kit de métricas digitales" class="product-thumb" loading="lazy">
         <div class="product-body">
           <span class="product-type notion">Plantilla Notion</span>
@@ -730,49 +753,41 @@ footer{padding:8px;margin-top:clamp(12px,2vw,28px)}
       <div class="stack-item">
         <img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png" alt="Notion" class="stack-icon" loading="lazy">
         <span class="stack-name">Notion</span>
-        <span class="stack-use">Templates & sistemas</span>
       </div>
       <div class="stack-item">
         <img src="https://framer.com/images/favicons/favicon.png" alt="Framer" class="stack-icon" loading="lazy" style="background:rgb(19,19,19)">
         <span class="stack-name">Framer</span>
-        <span class="stack-use">Diseño web</span>
       </div>
       <div class="stack-item">
         <img src="https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg" alt="Figma" class="stack-icon" loading="lazy">
         <span class="stack-name">Figma</span>
-        <span class="stack-use">UI & prototipos</span>
       </div>
       <div class="stack-item">
         <img src="https://images.ctfassets.net/p2f2g8mz07u6/5RqVpTfGO6R2AkOhkfuLOW/6af2c9a96898f516b41c3e25e9fdc89e/make-logo.png" alt="Make" class="stack-icon" loading="lazy">
         <span class="stack-name">Make</span>
-        <span class="stack-use">Automatizaciones</span>
       </div>
       <div class="stack-item">
         <img src="https://n8n.io/favicon.ico" alt="n8n" class="stack-icon" loading="lazy">
         <span class="stack-name">n8n</span>
-        <span class="stack-use">Workflows</span>
       </div>
       <div class="stack-item">
         <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" alt="ChatGPT" class="stack-icon" loading="lazy">
         <span class="stack-name">ChatGPT</span>
-        <span class="stack-use">IA generativa</span>
       </div>
       <div class="stack-item">
         <img src="assets/images/gumroad-icon.svg" alt="Gumroad" class="stack-icon" loading="lazy">
         <span class="stack-name">Gumroad</span>
-        <span class="stack-use">Distribución digital</span>
       </div>
       <div class="stack-item">
         <img src="https://cdn.worldvectorlogo.com/logos/adobe-illustrator-cc-icon.svg" alt="Illustrator" class="stack-icon" loading="lazy">
         <span class="stack-name">Illustrator</span>
-        <span class="stack-use">Branding & vectores</span>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ══════════════════════════════════════════════
-     CONNECT — Newsletter + Contacto (fusionados)
+     CONNECT — Newsletter + Contacto
 ══════════════════════════════════════════════ -->
 <section id="connect">
   <div class="connect-inner">
@@ -873,210 +888,249 @@ footer{padding:8px;margin-top:clamp(12px,2vw,28px)}
 </footer>
 
 <script>
+/* ══════════════════════════════════════════════
+   FIX PRINCIPAL: La IIFE original intentaba llamar
+   .addEventListener() sobre getElementById("t-next")
+   que devuelve null (el slider de testimonios fue
+   eliminado del HTML pero el JS quedó). Eso lanzaba
+   un TypeError que cortaba toda la ejecución posterior:
+   menú móvil, sombra del header y contadores nunca corrían.
+   Solución: se eliminó el bloque de slider muerto y
+   se añadieron null-checks defensivos en toda la IIFE.
+══════════════════════════════════════════════ */
 (function(){
   /* Progress bar */
-  var prog=document.getElementById("progress");
-  window.addEventListener("scroll",function(){var s=document.documentElement.scrollTop,h=document.documentElement.scrollHeight-document.documentElement.clientHeight;prog.style.width=(s/h*100)+"%";},{passive:true});
+  var prog = document.getElementById("progress");
+  if(prog){
+    window.addEventListener("scroll", function(){
+      var s = document.documentElement.scrollTop;
+      var h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      prog.style.width = (s / h * 100) + "%";
+    }, {passive: true});
+  }
 
   /* Reveal on scroll */
-  var io=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}});},{threshold:0.1,rootMargin:"0px 0px -40px 0px"});
-  document.querySelectorAll(".reveal").forEach(function(el){io.observe(el)});
-
-  /* Slider */
-  var track=document.getElementById("t-track"),dots=document.querySelectorAll(".slider-dot"),cur=0,total=3;
-  function goTo(i){cur=(i+total)%total;track.style.transform="translateX(-"+cur*100+"%)";dots.forEach(function(d,idx){d.classList.toggle("active",idx===cur)});}
-  document.getElementById("t-next").addEventListener("click",function(){goTo(cur+1)});
-  document.getElementById("t-prev").addEventListener("click",function(){goTo(cur-1)});
-  dots.forEach(function(d){d.addEventListener("click",function(){goTo(parseInt(d.dataset.index,10))})});
-  setInterval(function(){goTo(cur+1)},5500);
-  /* Touch */
-  var ts=0,sliderEl=document.getElementById("testimonial-slider");
-  sliderEl.addEventListener("touchstart",function(e){ts=e.changedTouches[0].screenX},{passive:true});
-  sliderEl.addEventListener("touchend",function(e){var dx=ts-e.changedTouches[0].screenX;if(Math.abs(dx)>50)goTo(dx>0?cur+1:cur-1);},{passive:true});
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); }
+    });
+  }, {threshold: 0.1, rootMargin: "0px 0px -40px 0px"});
+  document.querySelectorAll(".reveal").forEach(function(el){ io.observe(el); });
 
   /* Mobile menu */
-  var menu=document.getElementById("mobile-menu"),ham=document.getElementById("hamburger"),mc=document.getElementById("mob-close");
-  ham.addEventListener("click",function(){menu.classList.add("open");ham.setAttribute("aria-expanded","true");document.body.style.overflow="hidden"});
-  mc.addEventListener("click",function(){menu.classList.remove("open");ham.setAttribute("aria-expanded","false");document.body.style.overflow=""});
-  menu.querySelectorAll("a").forEach(function(a){a.addEventListener("click",function(){menu.classList.remove("open");document.body.style.overflow=""})});
+  var menu = document.getElementById("mobile-menu");
+  var ham  = document.getElementById("hamburger");
+  var mc   = document.getElementById("mob-close");
+  function closeMenu(){ if(menu) menu.classList.remove("open"); if(ham) ham.setAttribute("aria-expanded","false"); document.body.style.overflow = ""; }
+  if(ham)  ham.addEventListener("click", function(){ menu.classList.add("open"); ham.setAttribute("aria-expanded","true"); document.body.style.overflow = "hidden"; });
+  if(mc)   mc.addEventListener("click", closeMenu);
+  if(menu) menu.querySelectorAll("a").forEach(function(a){ a.addEventListener("click", closeMenu); });
 
-  /* Header shadow */
-  window.addEventListener("scroll",function(){
-    document.getElementById("site-header").style.boxShadow=window.scrollY>40?"0 2px 24px rgba(0,0,0,.09)":"none";
-  },{passive:true});
+  /* Header shadow on scroll */
+  var siteHeader = document.getElementById("site-header");
+  window.addEventListener("scroll", function(){
+    if(siteHeader) siteHeader.style.boxShadow = window.scrollY > 40 ? "0 2px 24px rgba(0,0,0,.09)" : "none";
+  }, {passive: true});
 
-  /* Staggered reveal para cards de productos */
-  document.querySelectorAll(".product-card,.stack-item").forEach(function(el,i){
+  /* Staggered reveal para product cards y stack items */
+  document.querySelectorAll(".product-card, .stack-item").forEach(function(el, i){
     el.style.transitionDelay = (i * 0.06) + "s";
     el.classList.add("reveal");
   });
-  /* Re-observe nuevos reveals */
   document.querySelectorAll(".reveal:not(.in)").forEach(function(el){ io.observe(el); });
 
   /* Counter animado para stats del lab */
   function animateCounter(el){
-    var txt = el.textContent.trim();
-    var num = parseFloat(txt.replace(/[^0-9.]/g,''));
-    var suffix = txt.replace(/[0-9.]/g,'');
-    if(isNaN(num)||num===0) return;
-    var start=0, duration=900, step=16;
-    var timer=setInterval(function(){
-      start+=step;
-      var progress=Math.min(start/duration,1);
-      var ease=1-Math.pow(1-progress,3);
-      el.textContent = (num<10 ? Math.ceil(ease*num) : Math.round(ease*num)) + suffix;
-      if(progress>=1) clearInterval(timer);
-    },16);
+    var txt    = el.textContent.trim();
+    var num    = parseFloat(txt.replace(/[^0-9.]/g, ""));
+    var suffix = txt.replace(/[0-9.]/g, "");
+    if(isNaN(num) || num === 0) return;
+    var start = 0, duration = 900;
+    var timer = setInterval(function(){
+      start += 16;
+      var progress = Math.min(start / duration, 1);
+      var ease     = 1 - Math.pow(1 - progress, 3);
+      el.textContent = (num < 10 ? Math.ceil(ease * num) : Math.round(ease * num)) + suffix;
+      if(progress >= 1) clearInterval(timer);
+    }, 16);
   }
-  var statObserver=new IntersectionObserver(function(entries){
+  var statObserver = new IntersectionObserver(function(entries){
     entries.forEach(function(e){
       if(e.isIntersecting){
         animateCounter(e.target);
-        e.target.parentElement.classList.add("in");
+        if(e.target.parentElement) e.target.parentElement.classList.add("in");
         statObserver.unobserve(e.target);
       }
     });
-  },{threshold:0.6});
+  }, {threshold: 0.6});
   document.querySelectorAll(".lab-stat-num-sm").forEach(function(el){ statObserver.observe(el); });
+
 })();
 
+/* ══════════════════════════════════════════════
+   TEMA (dark / light)
+   FIX: lógica consolidada, sin duplicar setTheme()
+══════════════════════════════════════════════ */
+function setTheme(theme){
+  document.body.classList.toggle("dark", theme === "dark");
+  localStorage.setItem("cl_theme", theme);
+  var sun  = document.getElementById("icon-sun");
+  var moon = document.getElementById("icon-moon");
+  if(sun && moon){
+    sun.style.display  = theme === "dark" ? "block" : "none";
+    moon.style.display = theme === "dark" ? "none"  : "block";
+  }
+}
+(function(){
+  var saved      = localStorage.getItem("cl_theme");
+  var prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+  setTheme(saved || (prefersDark ? "dark" : "light"));
+  var btn = document.getElementById("theme-toggle");
+  if(btn) btn.addEventListener("click", function(){
+    setTheme(document.body.classList.contains("dark") ? "light" : "dark");
+  });
+})();
 
+/* ══════════════════════════════════════════════
+   IDIOMA (ES / EN)
+   FIX: applyPreferredLanguage() corría ANTES de que
+   los listeners estuvieran listos — ahora todo va
+   dentro de un IIFE ordenado.
+══════════════════════════════════════════════ */
+(function(){
   var dict = {
     es: {
-      nav_products:'Productos', nav_focus:'Enfoque', nav_manifesto:'Manifiesto', nav_content:'Contenido', nav_contact:'Contacto', nav_cta:'Explorar',
-      hero_label:'Laboratorio digital', hero_sub:'Combinamos UX, inteligencia artificial y automatización para construir mejores experiencias digitales — sin perder lo humano.', hero_secondary:'Ver contenido',
-      focus_text:'Construimos desde el núcleo hacia afuera — del usuario al sistema, del problema a la solución — combinando diseño, IA y automatización.',
-      hero_btn_primary:'Ver proyectos', hero_btn_secondary:'', hero_scroll_hint:'Conoce el enfoque',
-      productos:'(Productos)', contenido:'(Contenido)', stack:'(Herramientas)', newsletter_title:'Recursos gratis, directo a tu bandeja.',
-      newsletter_sub:'Templates, automatizaciones y recursos de diseño UX — todo lo que construimos, primero para quienes se suscriben.', newsletter_btn:'Suscribirme',
-      contact_sub:'Cuéntanos de qué se trata, respondemos cuando podamos.', contact_title:'¿Tienes algo en mente?', contact_head:'Contáctanos'
+      nav_products:"Productos", nav_focus:"Enfoque", nav_manifesto:"Manifiesto",
+      nav_content:"Contenido", nav_contact:"Contacto", nav_cta:"Explorar",
+      hero_label:"Laboratorio digital",
+      hero_sub:"Combinamos UX, inteligencia artificial y automatización para construir mejores experiencias digitales — sin perder lo humano.",
+      focus_text:"Construimos desde el núcleo hacia afuera — del usuario al sistema, del problema a la solución — combinando diseño, IA y automatización.",
+      hero_btn_primary:"Ver proyectos", hero_scroll_hint:"Conoce el enfoque",
+      newsletter_title:"Recursos gratis, directo a tu bandeja.",
+      newsletter_sub:"Templates, automatizaciones y recursos de diseño UX — todo lo que construimos, primero para quienes se suscriben.",
+      newsletter_btn:"Suscribirme",
+      contact_title:"¿Tienes algo en mente?", contact_sub:"Cuéntanos de qué se trata, respondemos cuando podamos."
     },
     en: {
-      nav_products:'Products', nav_focus:'Focus', nav_manifesto:'Manifesto', nav_content:'Content', nav_contact:'Contact', nav_cta:'Explore',
-      hero_label:'Digital lab', hero_sub:'We combine UX, AI and automation to build better digital experiences — without losing the human side.', hero_secondary:'',
-      focus_text:'We build from the core outward — from the user to the system, from problem to solution — combining design, AI and automation.',
-      hero_btn_primary:'See work', hero_btn_secondary:'Watch content', hero_scroll_hint:'Discover the approach',
-      productos:'(Products)', contenido:'(Content)', stack:'(Tools)', newsletter_title:'Free resources, straight to your inbox.',
-      newsletter_sub:'Templates, automations and UX resources — everything we build, first for subscribers.', newsletter_btn:'Join the list',
-      contact_sub:'Tell us what it is about, we reply when we can.', contact_title:'Got something in mind?', contact_head:'Contact'
+      nav_products:"Products", nav_focus:"Focus", nav_manifesto:"Manifesto",
+      nav_content:"Content", nav_contact:"Contact", nav_cta:"Explore",
+      hero_label:"Digital lab",
+      hero_sub:"We combine UX, AI and automation to build better digital experiences — without losing the human side.",
+      focus_text:"We build from the core outward — from the user to the system, from problem to solution — combining design, AI and automation.",
+      hero_btn_primary:"See work", hero_scroll_hint:"Discover the approach",
+      newsletter_title:"Free resources, straight to your inbox.",
+      newsletter_sub:"Templates, automations and UX resources — everything we build, first for subscribers.",
+      newsletter_btn:"Join the list",
+      contact_title:"Got something in mind?", contact_sub:"Tell us what it is about, we reply when we can."
     }
   };
+
   function setLang(lang){
-    document.documentElement.lang = lang === 'en' ? 'en' : 'es-CO';
-    localStorage.setItem('cl_lang', lang);
-    document.querySelectorAll('[data-i18n]').forEach(function(el){
-      var key = el.getAttribute('data-i18n');
+    document.documentElement.lang = lang === "en" ? "en" : "es-CO";
+    localStorage.setItem("cl_lang", lang);
+    document.querySelectorAll("[data-i18n]").forEach(function(el){
+      var key = el.getAttribute("data-i18n");
       if(dict[lang] && dict[lang][key]){
-        if(el.children.length === 0){ el.textContent = dict[lang][key]; }
-        else {
-          var tn = Array.from(el.childNodes).find(function(n){ return n.nodeType===3 && n.textContent.trim(); });
-          if(tn) tn.textContent = dict[lang][key]; else el.textContent = dict[lang][key];
+        if(el.children.length === 0){
+          el.textContent = dict[lang][key];
+        } else {
+          var tn = Array.from(el.childNodes).find(function(n){ return n.nodeType === 3 && n.textContent.trim(); });
+          if(tn) tn.textContent = dict[lang][key];
+          else   el.textContent = dict[lang][key];
         }
       }
     });
-    var btn = document.getElementById('lang-toggle');
-    if(btn) btn.textContent = lang === 'en' ? 'ES' : 'EN';
+    var btn = document.getElementById("lang-toggle");
+    if(btn) btn.textContent = lang === "en" ? "ES" : "EN";
   }
+
   function applyPreferredLanguage(){
-    var saved = localStorage.getItem('cl_lang');
+    var saved = localStorage.getItem("cl_lang");
     if(saved){ setLang(saved); return; }
-    var nav = (navigator.language || '').toLowerCase();
-    setLang(nav.startsWith('en') ? 'en' : 'es');
+    var nav = (navigator.language || "").toLowerCase();
+    setLang(nav.startsWith("en") ? "en" : "es");
   }
-  var themeToggle = document.getElementById('theme-toggle');
-  var langToggle = document.getElementById('lang-toggle');
-  function setTheme(theme){
-    document.body.classList.toggle('dark', theme === 'dark');
-    localStorage.setItem('cl_theme', theme);
-    var sun = document.getElementById('icon-sun');
-    var moon = document.getElementById('icon-moon');
-    if(sun && moon){
-      sun.style.display = theme === 'dark' ? 'block' : 'none';
-      moon.style.display = theme === 'dark' ? 'none' : 'block';
-    }
-  }
-  var savedTheme = localStorage.getItem('cl_theme');
-  var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-  setTheme(savedTheme || (prefersDark ? 'dark' : 'light'));
-  if(themeToggle) themeToggle.addEventListener('click', function(){ setTheme(document.body.classList.contains('dark') ? 'light' : 'dark'); document.getElementById('icon-sun').style.display=document.body.classList.contains('dark')?'block':'none'; document.getElementById('icon-moon').style.display=document.body.classList.contains('dark')?'none':'block'; });
-  if(langToggle) langToggle.addEventListener('click', function(){
-    var cur = localStorage.getItem('cl_lang') || 'es';
-    setLang(cur === 'en' ? 'es' : 'en');
+
+  var langBtn = document.getElementById("lang-toggle");
+  if(langBtn) langBtn.addEventListener("click", function(){
+    var cur = localStorage.getItem("cl_lang") || "es";
+    setLang(cur === "en" ? "es" : "en");
   });
+
   applyPreferredLanguage();
+})();
 
-
-/* Focus text scroll color */
-  window.addEventListener("scroll",function(){
-    var focusText = document.querySelector("#enfoque .enfoque-text");
-    if(!focusText) return;
-    /* El texto cambia cuando el usuario ha scrolleado más allá del hero */
-    var threshold = document.getElementById("hero") ?
-      document.getElementById("hero").offsetHeight * 0.4 : 280;
-    if(window.scrollY > threshold){
-      focusText.classList.add("scrolled");
-    } else {
-      focusText.classList.remove("scrolled");
-    }
-  },{passive:true});
-
-
-/* Newsletter — envío AJAX a Formspree (sin recarga de página) */
+/* ══════════════════════════════════════════════
+   SCROLL COLOR — texto enfoque
+══════════════════════════════════════════════ */
 (function(){
-  var form = document.getElementById('nl-form');
+  var focusText = document.querySelector("#enfoque .enfoque-text");
+  if(!focusText) return;
+  window.addEventListener("scroll", function(){
+    var hero      = document.getElementById("hero");
+    var threshold = hero ? hero.offsetHeight * 0.4 : 280;
+    focusText.classList.toggle("scrolled", window.scrollY > threshold);
+  }, {passive: true});
+})();
+
+/* ══════════════════════════════════════════════
+   NEWSLETTER — envío AJAX a Formspree
+══════════════════════════════════════════════ */
+(function(){
+  var form = document.getElementById("nl-form");
   if(!form) return;
-  form.addEventListener('submit', function(e){
+  form.addEventListener("submit", function(e){
     e.preventDefault();
-    var btn = document.getElementById('nl-btn');
-    var endpoint = form.getAttribute('data-endpoint');
-    if(!endpoint || endpoint.includes('FORMSPREE_ID_AQUI')){
-      btn.textContent = '⚠ Configura Formspree primero';
-      btn.style.background = '#FF6D4D';
-      setTimeout(function(){ btn.textContent = 'Suscribirme'; btn.style.background = ''; }, 3000);
+    var btn      = document.getElementById("nl-btn");
+    var endpoint = form.getAttribute("data-endpoint");
+    if(!endpoint || endpoint.includes("FORMSPREE_ID_AQUI")){
+      btn.textContent = "⚠ Configura Formspree primero";
+      btn.style.background = "#FF6D4D";
+      setTimeout(function(){ btn.textContent = "Suscribirme"; btn.style.background = ""; }, 3000);
       return;
     }
-    btn.textContent = 'Enviando…';
-    btn.disabled = true;
+    btn.textContent = "Enviando…";
+    btn.disabled    = true;
     fetch(endpoint, {
-      method: 'POST',
-      headers: {'Accept':'application/json','Content-Type':'application/json'},
-      body: JSON.stringify({email: form.querySelector('input[type=email]').value})
+      method: "POST",
+      headers: {"Accept":"application/json","Content-Type":"application/json"},
+      body: JSON.stringify({email: form.querySelector("input[type=email]").value})
     })
     .then(function(r){ return r.json(); })
     .then(function(data){
       if(data.ok){
-        btn.textContent = '¡Listo! ✓';
-        btn.style.background = '#61c554';
+        btn.textContent    = "¡Listo! ✓";
+        btn.style.background = "#61c554";
         form.reset();
-        setTimeout(function(){ btn.textContent = 'Suscribirme'; btn.style.background = ''; btn.disabled = false; }, 4000);
-      } else {
-        throw new Error('error');
-      }
+        setTimeout(function(){ btn.textContent = "Suscribirme"; btn.style.background = ""; btn.disabled = false; }, 4000);
+      } else { throw new Error("error"); }
     })
     .catch(function(){
-      btn.textContent = 'Intenta de nuevo';
-      btn.style.background = '#FF6D4D';
-      btn.disabled = false;
-      setTimeout(function(){ btn.textContent = 'Suscribirme'; btn.style.background = ''; }, 3000);
+      btn.textContent    = "Intenta de nuevo";
+      btn.style.background = "#FF6D4D";
+      btn.disabled        = false;
+      setTimeout(function(){ btn.textContent = "Suscribirme"; btn.style.background = ""; }, 3000);
     });
   });
 })();
 
-
-/* Lab Notes slider — principios compactos */
+/* ══════════════════════════════════════════════
+   PRINCIPIOS SLIDER (lab notes)
+══════════════════════════════════════════════ */
 (function(){
   var lpTrack = document.getElementById("lp-track");
   if(!lpTrack) return;
-  var lpTotal = 3, lpCur = Math.floor(Math.random()*lpTotal);
+  var lpTotal = 3;
+  var lpCur   = 0;
+
   function lpGoTo(i){
     lpCur = (i + lpTotal) % lpTotal;
     lpTrack.style.transform = "translateX(-" + lpCur * 100 + "%)";
-    // actualizar dots en todos los slides
     document.querySelectorAll(".lab-p-dot").forEach(function(d){
       d.classList.toggle("active", parseInt(d.dataset.lp) === lpCur);
     });
   }
-  // next/prev — hay duplicados por slide, agruparlos
+
   document.querySelectorAll("[id^='lp-next']").forEach(function(btn){
     btn.addEventListener("click", function(){ lpGoTo(lpCur + 1); });
   });
@@ -1086,27 +1140,34 @@ footer{padding:8px;margin-top:clamp(12px,2vw,28px)}
   document.querySelectorAll(".lab-p-dot").forEach(function(d){
     d.addEventListener("click", function(){ lpGoTo(parseInt(d.dataset.lp)); });
   });
-  // Auto-avance
+
   setInterval(function(){ lpGoTo(lpCur + 1); }, 6000);
-  // Touch
+
+  /* Touch swipe */
   var lpTs = 0;
   var lpEl = lpTrack.parentElement;
-  lpEl.addEventListener("touchstart", function(e){ lpTs = e.changedTouches[0].screenX; },{passive:true});
-  lpEl.addEventListener("touchend", function(e){
+  lpEl.addEventListener("touchstart", function(e){ lpTs = e.changedTouches[0].screenX; }, {passive: true});
+  lpEl.addEventListener("touchend",   function(e){
     var dx = lpTs - e.changedTouches[0].screenX;
     if(Math.abs(dx) > 40) lpGoTo(dx > 0 ? lpCur + 1 : lpCur - 1);
-  },{passive:true});
-  lpTrack.style.transition = "none"; lpGoTo(lpCur); setTimeout(function(){ lpTrack.style.transition=""; },50);
+  }, {passive: true});
+
+  /* Iniciar sin transición para evitar flash */
+  lpTrack.style.transition = "none";
+  lpGoTo(0);
+  setTimeout(function(){ lpTrack.style.transition = ""; }, 50);
 })();
-/* Cursor ring — dot + thin ring (se inicializa solo en desktop con mouse) */
+
+/* ══════════════════════════════════════════════
+   CURSOR PERSONALIZADO (solo desktop con mouse)
+   FIX: el JS existía pero el CSS de .cl-dot y
+   .cl-ring faltaba — ahora está en el <style>.
+══════════════════════════════════════════════ */
 (function initCursor(){
   if(!window.matchMedia("(pointer:fine)").matches) return;
-  var dot = document.createElement("div");
-  dot.className = "cl-dot";
-  dot.style.cssText = "opacity:0;transition:opacity .3s";
-  var ring = document.createElement("div");
-  ring.className = "cl-ring";
-  ring.style.cssText = "opacity:0;transition:opacity .3s,width .22s cubic-bezier(0.34,1.56,0.64,1),height .22s cubic-bezier(0.34,1.56,0.64,1),border-radius .22s,border-color .2s";
+
+  var dot  = document.createElement("div"); dot.className  = "cl-dot";  dot.style.opacity  = "0";
+  var ring = document.createElement("div"); ring.className = "cl-ring"; ring.style.opacity = "0";
   document.body.appendChild(dot);
   document.body.appendChild(ring);
 
@@ -1115,14 +1176,9 @@ footer{padding:8px;margin-top:clamp(12px,2vw,28px)}
   document.addEventListener("mousemove", function(e){
     mx = e.clientX; my = e.clientY;
     dot.style.left = mx + "px"; dot.style.top = my + "px";
-    if(!visible){
-      visible = true;
-      dot.style.opacity = "1";
-      ring.style.opacity = ".55";
-    }
+    if(!visible){ visible = true; dot.style.opacity = "1"; ring.style.opacity = ".55"; }
   });
 
-  /* Lerp ring */
   (function loop(){
     rx += (mx - rx) * 0.10;
     ry += (my - ry) * 0.10;
@@ -1130,28 +1186,22 @@ footer{padding:8px;margin-top:clamp(12px,2vw,28px)}
     requestAnimationFrame(loop);
   })();
 
-  /* Hover: links → ring rectangular; cards → ring expandido */
   document.addEventListener("mouseover", function(e){
     var t = e.target;
-    if(t.closest("a")){ ring.classList.add("hover","link-hover"); dot.style.opacity = ".4"; }
-    else if(t.closest("button")){ ring.classList.add("hover"); }
-    else if(t.closest(".product-card,.stack-item,.lab-principios,.lab-stats-compact")){ ring.classList.add("hover"); }
+    if(t.closest("a"))      { ring.classList.add("hover","link-hover"); dot.style.opacity = ".4"; }
+    else if(t.closest("button")) { ring.classList.add("hover"); }
+    else if(t.closest(".product-card,.stack-item,.lab-principios,.lab-stats-compact")) { ring.classList.add("hover"); }
   });
   document.addEventListener("mouseout", function(e){
     var t = e.target;
-    if(t.closest("a")||t.closest("button")||t.closest(".product-card,.stack-item,.lab-principios,.lab-stats-compact")){
+    if(t.closest("a") || t.closest("button") || t.closest(".product-card,.stack-item,.lab-principios,.lab-stats-compact")){
       ring.classList.remove("hover","link-hover"); dot.style.opacity = "1";
     }
   });
-
   document.addEventListener("mousedown", function(){ dot.classList.add("click"); ring.classList.add("click"); });
   document.addEventListener("mouseup",   function(){ dot.classList.remove("click"); ring.classList.remove("click"); });
-
-  /* Ocultar cuando el mouse sale de la ventana */
-  document.addEventListener("mouseleave", function(){ dot.style.opacity="0"; ring.style.opacity="0"; visible=false; });
-  document.addEventListener("mouseenter", function(){
-    if(visible){ dot.style.opacity="1"; ring.style.opacity=".55"; }
-  });
+  document.addEventListener("mouseleave", function(){ dot.style.opacity = "0"; ring.style.opacity = "0"; visible = false; });
+  document.addEventListener("mouseenter", function(){ if(visible){ dot.style.opacity = "1"; ring.style.opacity = ".55"; } });
 })();
 </script>
 
