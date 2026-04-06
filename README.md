@@ -1,50 +1,112 @@
-# Concentric Lab — Sitio Web
+# Concentric Lab — Sitio Web Oficial
 
-Sitio web oficial de **Concentric Lab** — laboratorio digital de UX/UI, IA y automatización desde Bogotá.
+Sitio web de **Concentric Lab** — laboratorio digital de UX/UI, IA y automatización desde Bogotá, Colombia.
+
+## ¿Para qué sirve este README?
+
+El README es el primer documento que ve cualquier persona que abra el repositorio en GitHub. Sirve para:
+- Explicar qué es el proyecto y cómo está estructurado
+- Documentar cómo instalar, correr o deployar el sitio
+- Dejar pendientes y notas de configuración para el equipo (o para ti mismo en el futuro)
+
+---
 
 ## Stack
-- HTML/CSS/JS puro — sin frameworks
-- Deploy en Netlify (drag & drop)
-- Fuentes: Inter (Google Fonts) + Cal Sans (jsDelivr)
 
-## Estructura
+- **HTML / CSS / JS puro** — sin frameworks, cero dependencias de build
+- **Fuentes:** Inter (Google Fonts) + Cal Sans (jsDelivr/fontsource)
+- **Formulario:** Formspree (`xreoreqr`) — ya configurado
+- **Deploy:** GitHub Pages o Netlify (drag & drop o CI automático)
+
+---
+
+## Estructura del proyecto
+
 ```
 concentriclab/
-├── index.html          ← sitio completo
+├── index.html              ← sitio completo (HTML + CSS + JS inline)
 ├── assets/
-│   ├── images/         ← descarga las imágenes de Framer CDN (ver lista abajo)
-│   └── video/          ← descarga el video de fondo
+│   ├── images/             ← todos los assets de imagen
+│   │   ├── logo.png
+│   │   ├── favicon.png
+│   │   ├── og-image.png
+│   │   ├── hero-1.webp
+│   │   ├── hero-2.webp
+│   │   ├── hero-3.webp
+│   │   ├── enfoque-label.png
+│   │   ├── producto-1.webp
+│   │   ├── principio-1.webp
+│   │   ├── principio-2.webp
+│   │   ├── principio-3.webp
+│   │   ├── yt-thumbnail.webp
+│   │   ├── contact-bg.webp
+│   │   ├── footer-bg.webp
+│   │   └── gumroad-icon.svg
+│   └── videos/
+│       └── stats-bg.mp4    ← video de fondo sección manifiesto
 └── README.md
 ```
 
-## Imágenes pendientes de descargar
-Descarga cada URL y guárdala con el nombre indicado en `assets/images/` o `assets/video/`:
+---
 
-| Archivo local | URL original |
-|---|---|
-| `assets/images/logo.png` | https://framerusercontent.com/images/hd58yXIN4R47jxZgWD19awres.png |
-| `assets/images/favicon.png` | https://framerusercontent.com/images/i8vX66J3OcrRANITImxFn4WVoY.png |
-| `assets/images/og-image.png` | https://framerusercontent.com/assets/NFKKkgn3P1xC3ZE4e3yv4VIeoM.png |
-| `assets/images/hero-1.jpeg` | https://framerusercontent.com/images/rf2SDv1XBDB2J8J0Jc5rCqcm2U.jpeg |
-| `assets/images/hero-2.jpeg` | https://framerusercontent.com/images/9uAvGuD7oMUyJdcTr62h13V7mjU.jpeg |
-| `assets/images/hero-3.jpeg` | https://framerusercontent.com/images/4MKLmJBsDVZK97JDWqkAa17N3RU.jpeg |
-| `assets/images/enfoque-label.png` | https://framerusercontent.com/images/UmIUDVWhypROFuonPgr1nDSTSjg.png |
-| `assets/images/producto-1.png` | https://framerusercontent.com/images/BYbTfLPwKrQ8KDoRNlrCPLZwoj0.png |
-| `assets/images/principio-1.jpeg` | https://framerusercontent.com/images/vSZyVOnLBagag5SXRINgQXDT1j0.jpeg |
-| `assets/images/principio-2.jpeg` | https://framerusercontent.com/images/S5WQsuzNpNz4MTC6JhZVzDj4Vic.jpeg |
-| `assets/images/principio-3.jpeg` | https://framerusercontent.com/images/8oe75LVG7p5S6V1RwBrzSHrAR0.jpeg |
-| `assets/images/yt-thumbnail.png` | https://framerusercontent.com/images/YcYECqqfP3DEf1qBy7Ldk27rqbU.png |
-| `assets/images/contact-bg.png` | https://framerusercontent.com/images/1sREGvYWbdhqXmijCOMUIsD7A.png |
-| `assets/images/footer-bg.jpeg` | https://framerusercontent.com/images/eHn2ObLmY2s5f30XS3PFk7Pnv4.jpeg |
-| `assets/images/gumroad-icon.svg` | https://framerusercontent.com/images/9oFUtuMBLGiKbIQAsGJZYO8sB4.svg |
-| `assets/video/stats-bg.mp4` | https://framerusercontent.com/assets/3CTYWqZN338ZP9MTYUs5qYCvY.mp4 |
+## Cómo deployar
 
-## Deploy en Netlify
+### Opción A — GitHub Pages (recomendado para control de versiones)
+1. Sube todos los archivos a un repositorio en GitHub
+2. Ve a **Settings → Pages → Source → Deploy from branch → `main` → `/root`**
+3. GitHub genera la URL automáticamente (ej. `tu-usuario.github.io/concentriclab`)
+
+### Opción B — Netlify (más rápido, drag & drop)
 1. Ve a [netlify.com/drop](https://netlify.com/drop)
 2. Arrastra la carpeta completa del proyecto
-3. ¡Listo! URL disponible en segundos
+3. URL disponible en segundos
 
-## Pendientes antes de producción final
-- [ ] Descargar todas las imágenes listadas arriba
-- [ ] Crear cuenta en [Formspree.io](https://formspree.io) y reemplazar `FORMSPREE_ID_AQUI` en index.html
-- [ ] Actualizar canonical URL cuando tengas dominio propio (busca `TODO` en index.html)
+### Dominio propio
+Cuando tengas dominio (`concentriclab.com`):
+1. En Netlify/GitHub Pages: configura el dominio custom en Settings
+2. Busca `TODO` en `index.html` y actualiza la URL canónica
+3. Usa **Cloudflare Registrar** para el registro más barato + Cloudflare Pages para hosting gratuito
+
+---
+
+## Configuración pendiente
+
+- [x] Formspree configurado — ID: `xreoreqr`
+- [ ] Actualizar URL canónica en `<head>` cuando tengas dominio propio
+- [ ] Crear productos "Blueprint Make/n8n" y "UI Kit Figma" cuando estén listos
+- [ ] Agregar link real de Notion Store al botón "Descarga en Notion"
+- [ ] Subir más videos al canal de YouTube para activar sección de contenido
+
+---
+
+## Funcionalidades del sitio
+
+| Feature | Descripción |
+|---|---|
+| **Modo oscuro / claro** | Guardado en `localStorage`, respeta `prefers-color-scheme` del sistema |
+| **Bilingüe ES / EN** | Sistema i18n propio, sin librerías externas |
+| **Animación letra por letra** | El párrafo de Enfoque anima cada carácter individualmente al hacer scroll |
+| **Slider de principios** | Autoavance cada 6s, swipe táctil, dots y flechas |
+| **Cursor personalizado** | Solo en desktop con mouse (pointer:fine) |
+| **Contador animado** | Los números del manifiesto se animan al entrar en viewport |
+| **Progress bar** | Barra de progreso de scroll en la parte superior |
+| **Newsletter** | Integrado con Formspree, envío AJAX sin recarga |
+
+---
+
+## Paleta de colores
+
+| Variable | Valor | Uso |
+|---|---|---|
+| `--blue` | `rgb(80,90,245)` | Color principal de marca |
+| `--salmon` | `rgb(244,120,85)` | Coral de marca, acentos cálidos |
+| `--pink` | `rgb(255,130,225)` | Acentos secundarios |
+| `--blue-lt` | `rgb(130,138,255)` | Versión clara del azul (secciones dark) |
+
+---
+
+## Créditos
+
+Diseño, desarrollo y contenido: **Concentric Lab**  
+Bogotá, Colombia · 2026  
+[concentriclab.com](https://concentriclab.com) · [@concentriclab](https://instagram.com/concentriclab)
