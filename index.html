@@ -168,8 +168,46 @@ body.dark header{background:rgba(9,9,13,.92)}
 .hero-row{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:nowrap}
 .hero-h1{font-family:"Cal Sans",sans-serif;font-size:clamp(38px,6.4vw,76px);font-weight:400;line-height:1.03;letter-spacing:-1.5px}
 .hero-h1.dark{color:var(--text-dark)}
-.hero-h1.orange{color:var(--salmon)}
-.hero-h1.blue{color:var(--blue)}
+
+/* ── SHIMMER: las tres palabras resaltadas comparten el mismo gradiente
+   en coordenadas del viewport (background-attachment:fixed), así el
+   destello viaja como UNA sola luz a través de todas ellas ── */
+.hero-h1.orange,
+.hero-h1.blue{
+  /* Fallback sólido mientras carga o en navegadores sin soporte */
+  color:var(--salmon);
+}
+@supports(-webkit-background-clip:text) or (background-clip:text){
+  .hero-h1.orange,
+  .hero-h1.blue{
+    background:linear-gradient(
+      90deg,
+      var(--salmon)          0%,
+      var(--salmon)          8%,
+      rgb(255,190,160)      18%,   /* destello cálido — pico de luz */
+      var(--blue-lt)        26%,
+      var(--blue)           36%,
+      var(--blue)           50%,
+      rgb(170,178,255)      60%,   /* destello frío — pico de luz */
+      var(--salmon)         70%,
+      var(--salmon)         80%,
+      rgb(255,190,160)      90%,   /* loop: inicio cálido de nuevo */
+      var(--blue-lt)        100%
+    );
+    background-size:400vw 100%;
+    background-attachment:fixed;          /* coordenadas de viewport = máscara unificada */
+    -webkit-background-clip:text;
+    background-clip:text;
+    -webkit-text-fill-color:transparent;
+    color:transparent;
+    animation:heroShimmer 6s linear infinite;
+    will-change:background-position;
+  }
+}
+@keyframes heroShimmer{
+  0%  {background-position:300vw center}
+  100%{background-position:-100vw center}
+}
 .hero-img{width:clamp(54px,5.2vw,82px);height:clamp(54px,5.2vw,82px);border-radius:50px;object-fit:cover;flex-shrink:0;opacity:0;transform:scale(0.4) rotate(-180deg);animation:heroImg 1.6s cubic-bezier(0.22,1,0.36,1) 0.4s both;box-shadow:0 8px 32px rgba(0,0,0,.18);will-change:opacity,transform;backface-visibility:hidden}
 @keyframes heroImg{to{opacity:1;transform:scale(1) rotate(0deg)}}
 .hero-sub{max-width:560px;font-size:clamp(15px,1.8vw,17px);color:var(--text-muted);line-height:1.7;margin:4px auto 0}
