@@ -127,6 +127,11 @@ button{cursor:pointer;font-family:inherit;border:none;background:none}
 .cl-ring.link-hover{border-radius:6px;border-color:rgba(80,90,245,.4)}
 .cl-dot.click{width:4px;height:4px}
 .cl-ring.click{width:24px;height:24px}
+/* Cursor coral en modo oscuro */
+body.dark .cl-dot{background:var(--salmon)}
+body.dark .cl-ring{border-color:rgba(244,120,85,.5)}
+body.dark .cl-ring.hover{border-color:rgba(244,120,85,.35)}
+body.dark .cl-ring.link-hover{border-color:rgba(244,120,85,.4)}
 
 /* ═══════ HEADER ═══════ */
 header{position:fixed;top:0;left:0;width:100%;z-index:100;background:rgba(218,218,222,.55);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);display:flex;flex-direction:column;align-items:center;transition:box-shadow .3s,background .35s}
@@ -505,6 +510,46 @@ body:not(.dark) .connect-contact{box-shadow:0 2px 16px rgba(0,0,0,.05)}
 .stack-icon-make{background:rgb(106,14,249)!important;padding:4px!important;filter:invert(1) brightness(2)!important}
 
 
+
+/* ── HERO ORBs — blobs con parallax ── */
+.hero-bg-orb{
+  position:absolute;
+  border-radius:50%;
+  pointer-events:none;
+  will-change:transform;
+  filter:blur(60px);
+}
+.hero-orb-1{
+  width:520px;height:520px;
+  background:radial-gradient(circle,rgba(80,90,245,.13) 0%,transparent 70%);
+  top:-10%;left:-8%;
+  animation:orbDrift1 12s ease-in-out infinite alternate;
+}
+.hero-orb-2{
+  width:400px;height:400px;
+  background:radial-gradient(circle,rgba(244,120,85,.11) 0%,transparent 70%);
+  bottom:-5%;right:-6%;
+  animation:orbDrift2 15s ease-in-out infinite alternate;
+}
+.hero-orb-3{
+  width:280px;height:280px;
+  background:radial-gradient(circle,rgba(255,130,225,.08) 0%,transparent 70%);
+  top:40%;left:55%;
+  animation:orbDrift3 10s ease-in-out infinite alternate;
+}
+@keyframes orbDrift1{
+  0%  {transform:translate(0,0) scale(1)}
+  100%{transform:translate(6%,8%) scale(1.1)}
+}
+@keyframes orbDrift2{
+  0%  {transform:translate(0,0) scale(1)}
+  100%{transform:translate(-7%,-5%) scale(1.08)}
+}
+@keyframes orbDrift3{
+  0%  {transform:translate(0,0) scale(1)}
+  100%{transform:translate(-4%,6%) scale(1.15)}
+}
+
 /* ═══════ SCROLL TO TOP ═══════ */
 #back-top{
   position:fixed;
@@ -582,6 +627,9 @@ body:not(.dark) .connect-contact{box-shadow:0 2px 16px rgba(0,0,0,.05)}
      HERO
 ══════════════════════════════════════════════ -->
 <section id="hero">
+  <div class="hero-bg-orb hero-orb-1" aria-hidden="true"></div>
+  <div class="hero-bg-orb hero-orb-2" aria-hidden="true"></div>
+  <div class="hero-bg-orb hero-orb-3" aria-hidden="true"></div>
   <div class="hero-inner">
     <p class="hero-label reveal"><span data-i18n="hero_label">Laboratorio digital</span></p>
     <div class="hero-heading reveal">
@@ -1445,6 +1493,18 @@ function splitEnfoqueText(){
   document.addEventListener("mouseup",   function(){ dot.classList.remove("click"); ring.classList.remove("click"); });
   document.addEventListener("mouseleave", function(){ dot.style.opacity = "0"; ring.style.opacity = "0"; visible = false; });
   document.addEventListener("mouseenter", function(){ if(visible){ dot.style.opacity = "1"; ring.style.opacity = ".55"; } });
+
+  /* Parallax suave en los orbs del hero al mover el mouse */
+  var orbs = document.querySelectorAll(".hero-bg-orb");
+  if(orbs.length){
+    document.addEventListener("mousemove", function(e){
+      var cx = (e.clientX / window.innerWidth  - 0.5);
+      var cy = (e.clientY / window.innerHeight - 0.5);
+      if(orbs[0]) orbs[0].style.transform = "translate(" + (cx*28) + "px," + (cy*18) + "px) scale(1)";
+      if(orbs[1]) orbs[1].style.transform = "translate(" + (cx*-20) + "px," + (cy*-14) + "px) scale(1)";
+      if(orbs[2]) orbs[2].style.transform = "translate(" + (cx*14) + "px," + (cy*22) + "px) scale(1)";
+    }, {passive:true});
+  }
 })();
 </script>
 
