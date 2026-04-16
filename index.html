@@ -3,41 +3,40 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Concéntrico Lab — Templates de Notion, automatizaciones y diseño UX para founders en LATAM</title>
-<meta name="description" content="Plantillas de Notion, automatizaciones y recursos de diseño UX/UI listos para usar. Herramientas prácticas impulsadas por IA para founders y creators en LATAM.">
+<title>Concéntrico Lab — Laboratorio de diseño, branding, IA y automatización · LATAM</title>
+<meta name="description" content="Laboratorio digital desde Bogotá. Diseño, branding, IA y automatización — sistemas y experiencias para founders y builders en LATAM.">
 <link rel="icon" href="assets/images/favicon.png">
 <link rel="apple-touch-icon" href="assets/images/favicon.png">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Concéntrico Lab — Templates, automatizaciones y diseño UX para LATAM">
-<meta property="og:description" content="Plantillas de Notion, automatizaciones y recursos de diseño UX/UI para founders y creators en LATAM.">
-<meta property="og:image" content="assets/images/og-image.png">
+<meta property="og:title" content="Concéntrico Lab — Laboratorio de diseño, branding, IA y automatización · LATAM">
+<meta property="og:description" content="Diseño, branding, IA y automatización convergiendo desde Bogotá para LATAM.">
+<meta property="og:image" content="https://concentricolab.vercel.app/assets/images/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Concéntrico Lab — Templates, automatizaciones y diseño UX para LATAM">
-<meta name="twitter:image" content="assets/images/og-image.png">
+<meta name="twitter:title" content="Concéntrico Lab — Laboratorio de diseño, branding, IA y automatización · LATAM">
+<meta name="twitter:image" content="https://concentricolab.vercel.app/assets/images/og-image.png">
 <!-- TODO: Actualizar esta URL cuando tengas dominio propio (ej. concentriclab.com) -->
 <link rel="canonical" href="https://concentricolab.vercel.app/">
+  <!-- ═══ SEO AVANZADO ═══ -->
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="author" content="Christian Camilo Sánchez Gómez — Concéntrico Lab">
+  <meta name="keywords" content="diseño, branding, identidad de marca, UX, automatización, inteligencia artificial, laboratorio digital, consultoría, LATAM, Colombia, Bogotá, sistemas de diseño, IA, Make, n8n, Notion">
+  <meta name="theme-color" content="#5170FF" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#00031F" media="(prefers-color-scheme: dark)">
+  <meta property="og:locale" content="es_CO">
+  <meta property="og:site_name" content="Concéntrico Lab">
+  <meta name="twitter:site" content="@concentriclab">
+  <link rel="alternate" hreflang="es" href="https://concentricolab.vercel.app/">
+  <link rel="alternate" hreflang="en" href="https://concentricolab.vercel.app/?lang=en">
+  <link rel="alternate" hreflang="x-default" href="https://concentricolab.vercel.app/">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+  <!-- Google Search Console: descomenta y pega tu código cuando lo tengas -->
+  <!-- <meta name="google-site-verification" content="PEGA_TU_CÓDIGO_AQUÍ"> -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/@fontsource/cal-sans/index.css" rel="stylesheet">
 
-<script type="application/ld+json">
-{
-  "@context":"https://schema.org",
-  "@type":"Organization",
-  "name":"Concéntrico Lab",
-  "url":"https://concentricolab.vercel.app/",
-  "logo":"assets/images/logo.png",
-  "description":"Studio de diseño UX/UI, inteligencia artificial y automatización desde Bogotá. Templates, sistemas y herramientas prácticas para founders y creators en LATAM.",
-  "address":{"@type":"PostalAddress","addressLocality":"Bogotá","addressCountry":"CO"},
-  "sameAs":[
-    "https://www.linkedin.com/company/concentriclab/",
-    "https://www.instagram.com/concentriclab",
-    "https://www.youtube.com/@ConcentricLab"
-  ],
-  "offers":{"@type":"Offer","name":"Kit de métricas digitales","url":"https://concentriclab.gumroad.com/l/metricasdigitales"}
-}
-</script>
+
 
 <style>
 /* ── TOKENS ── */
@@ -45,7 +44,7 @@
   --bg:rgb(218,218,222);
   --bg-warm:rgb(235,232,228);
   --bg-alt:rgb(232,231,228);
-  --bg-dark-section:rgb(10,10,14);
+  --bg-dark-section:#010316;
   --text-dark:rgb(12,12,14);
   --text-muted:rgb(88,88,95);
   --white:rgb(255,255,255);
@@ -58,8 +57,8 @@
   --blue-lt:rgb(130,138,255);
   --pink:rgb(255,130,225);
   --green:rgb(90,200,80);
-  --dark:rgb(10,10,14);
-  --dark-glass:rgba(10,10,14,0.85);
+  --dark:#00031F;
+  --dark-glass:rgba(0,3,31,0.85);
   --max-w:1200px;
   --pad:clamp(20px,5vw,80px);
   --gap:clamp(44px,5.5vw,76px);
@@ -69,16 +68,16 @@
 html{scroll-behavior:smooth}
 body{font-family:"Inter",Arial,sans-serif;background:var(--bg);color:var(--text-dark);overflow-x:hidden;-webkit-font-smoothing:antialiased;transition:background .35s,color .35s}
 body.dark{
-  --bg:rgb(9,9,13);
-  --bg-alt:rgb(14,14,20);
-  --bg-dark-section:rgb(5,5,9);
+  --bg:#00031F;
+  --bg-alt:#020425;
+  --bg-dark-section:#010316;
   --text-dark:rgb(238,238,245);
   --text-muted:rgba(255,255,255,.48);
   background:var(--bg);
   color:var(--text-dark);
 }
 /* FIX: Removed duplicate body.dark .nav-ghost — se unifica aquí */
-body.dark .nav-ghost{background:rgba(255,255,255,.07);color:var(--white);border-color:rgba(255,255,255,.11)}
+body.dark .nav-ghost{background:rgba(0,3,31,.45);color:var(--white);border-color:rgba(81,112,255,.18)}
 img,video{display:block;max-width:100%}
 a{text-decoration:none;color:inherit}
 ul{list-style:none}
@@ -135,7 +134,7 @@ body.dark .cl-ring.link-hover{border-color:rgba(244,120,85,.4)}
 
 /* ═══════ HEADER ═══════ */
 header{position:fixed;top:0;left:0;width:100%;z-index:100;background:rgba(218,218,222,.55);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);display:flex;flex-direction:column;align-items:center;transition:box-shadow .3s,background .35s}
-body.dark header{background:rgba(9,9,13,.55)}
+body.dark header{background:rgba(0,3,31,.65);border-bottom:1px solid rgba(81,112,255,.08)}
 .nav-notch{display:inline-flex;align-items:center;gap:8px;padding:5px 20px 9px;background:var(--blue);border-radius:0 0 72px 72px;margin-top:-4px;margin-bottom:4px;box-shadow:0 4px 20px rgba(80,90,245,.3)}
 .nav-notch .dot{width:7px;height:7px;border-radius:50%;background:var(--salmon);flex-shrink:0;animation:pulse 2.4s ease-in-out infinite}
 @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(244,120,85,.65)}50%{box-shadow:0 0 0 6px rgba(244,120,85,0)}}
@@ -575,6 +574,42 @@ body:not(.dark) .connect-contact{box-shadow:0 2px 16px rgba(0,0,0,.05)}
 @keyframes countUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 .lab-stat-row.in .lab-stat-num-sm{animation:countUp .6s cubic-bezier(.22,1,.36,1) forwards}
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://concentricolab.vercel.app/#organization",
+      "name": "Concéntrico Lab",
+      "url": "https://concentricolab.vercel.app/",
+      "logo": { "@type": "ImageObject", "url": "https://concentricolab.vercel.app/assets/images/og-image.png" },
+      "description": "Laboratorio digital de diseño, branding, IA y automatización desde Bogotá para LATAM.",
+      "foundingLocation": { "@type": "Place", "name": "Bogotá, Colombia" },
+      "founder": { "@type": "Person", "name": "Christian Camilo Sánchez Gómez", "jobTitle": "Diseñador Industrial, UX/UI, Branding y Automatización" },
+      "knowsAbout": ["Diseño industrial","Branding e identidad de marca","UX/UI Design","Customer Experience","Automatización de procesos","Inteligencia Artificial aplicada","Consultoría de diseño","Sistemas de diseño"],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Productos y servicios",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Templates de Notion", "description": "Plantillas para gestión de proyectos y productividad" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Automatizaciones", "description": "Flujos con Make, n8n e IA para equipos y founders" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Consultoría de diseño y sistemas", "description": "Diseño, branding, estrategia de producto y experiencia de usuario" } }
+        ]
+      },
+      "areaServed": { "@type": "Place", "name": "Latinoamérica" }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://concentricolab.vercel.app/#website",
+      "url": "https://concentricolab.vercel.app/",
+      "name": "Concéntrico Lab",
+      "inLanguage": "es",
+      "publisher": { "@id": "https://concentricolab.vercel.app/#organization" }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -650,8 +685,8 @@ body:not(.dark) .connect-contact{box-shadow:0 2px 16px rgba(0,0,0,.05)}
       </div>
     </div>
     <p class="hero-sub reveal">
-      <span data-i18n="hero_sub">Combinamos UX, inteligencia artificial y automatización para construir
-      mejores experiencias digitales — sin perder lo humano.</span>
+      <span data-i18n="hero_sub">Diseño, branding, IA y automatización — convergiendo en sistemas
+      y experiencias que funcionan desde el núcleo.</span>
     </p>
     <div class="hero-actions reveal">
       <a href="#enfoque" class="hero-scroll-hint">
@@ -772,7 +807,7 @@ body:not(.dark) .connect-contact{box-shadow:0 2px 16px rgba(0,0,0,.05)}
             </div>
           </div>
           <div class="lab-principio-slide lp-bg-2">
-            <p class="lab-principio-quote">&ldquo;Creemos que el buen diseño no se impone — se descubre junto al usuario.&rdquo;</p>
+            <p class="lab-principio-quote">&ldquo;La interdisciplinariedad no es un valor agregado — es el núcleo de cómo operamos.&rdquo;</p>
             <div class="lab-principio-footer">
               <span class="lab-principio-brand">CONCENTRIC LAB · MANIFIESTO</span>
               <div style="display:flex;align-items:center;gap:10px">
@@ -902,7 +937,7 @@ body:not(.dark) .connect-contact{box-shadow:0 2px 16px rgba(0,0,0,.05)}
           <span data-i18n="cont_badge">En producción</span>
         </span>
         <p class="content-coming-title" data-i18n="cont_title">Contenido en camino</p>
-        <p class="content-coming-sub" data-i18n="cont_sub">Videos, notas y recursos sobre diseño UX, IA y automatización para founders y builders en LATAM. Pronto en YouTube e Instagram.</p>
+        <p class="content-coming-sub" data-i18n="cont_sub">Videos, notas y recursos sobre diseño, branding, IA y automatización para founders y builders en LATAM. Pronto en YouTube e Instagram.</p>
       </div>
       <div class="content-coming-right">
         <a href="https://www.youtube.com/@ConcentricLab" target="_blank" rel="noopener" class="content-yt-link">
@@ -984,7 +1019,7 @@ body:not(.dark) .connect-contact{box-shadow:0 2px 16px rgba(0,0,0,.05)}
         </span>
         <div>
           <h3 class="connect-nl-title" data-i18n="newsletter_title">Recursos gratis, directo a tu bandeja.</h3>
-          <p class="connect-nl-sub" style="margin-top:8px" data-i18n="newsletter_sub">Templates, automatizaciones y recursos de diseño UX — todo lo que construimos, primero para quienes se suscriben.</p>
+          <p class="connect-nl-sub" style="margin-top:8px" data-i18n="newsletter_sub">Templates, automatizaciones, branding y recursos de diseño — todo lo que construimos en el lab, primero para quienes se suscriben.</p>
         </div>
         <div style="display:flex;flex-direction:column;gap:8px">
           <form class="nl-form" id="nl-form" data-endpoint="https://formspree.io/f/xreoreqr">
@@ -1204,8 +1239,8 @@ function setTheme(theme){
       hero_h1_r1a:"Diseño\u00a0que", hero_h1_r1b:"Piensa.",
       hero_h1_r2a:"Sistemas",       hero_h1_r2b:"que\u00a0funcionan.",
       hero_h1_r3a:"Experiencias",   hero_h1_r3b:"que\u00a0conectan.",
-      hero_sub:"Combinamos UX, inteligencia artificial y automatización para construir mejores experiencias digitales — sin perder lo humano.",
-      focus_text:"Construimos desde el núcleo hacia afuera — del usuario al sistema, del problema a la solución — combinando diseño, IA y automatización.",
+      hero_sub:"Diseño, branding, IA y automatización — convergiendo en sistemas y experiencias que funcionan desde el núcleo.",
+      focus_text:"Construimos desde el núcleo hacia afuera — del dato al criterio, del usuario al sistema, del problema a la solución — combinando diseño, branding, IA y automatización en una sola mirada.",
       focus_badge:"hola 👋",focus_badge_label:"Nuestro enfoque",
       hero_btn_primary:"Ver proyectos", hero_scroll_hint:"Conoce el enfoque",
       filo_label:"En qué creemos", filo_title:"La filosofía del lab",
@@ -1214,7 +1249,7 @@ function setTheme(theme){
       stat2_num:"+6",stat2_label:"Disciplinas que convergen en cada entrega.",
       stat3_num:"x3",stat3_label:"Más rápido que un flujo de trabajo tradicional.",
       p1_quote:"Las mejores soluciones parten del centro hacia afuera: del usuario al sistema.",
-      p2_quote:"Creemos que el buen diseño no se impone — se descubre junto al usuario.",
+      p2_quote:"La interdisciplinariedad no es un valor agregado — es el núcleo de cómo operamos.",
       p3_quote:"Menos fricción. Más foco. Eso es todo.",
       sec_productos:"(Productos)", sec_productos_title:"Lo que hemos construido",
       prod1_type:"Plantilla Notion",prod1_title:"Kit de métricas digitales",
@@ -1228,14 +1263,14 @@ function setTheme(theme){
       prod3_cs:"En desarrollo",prod3_btn_cs2:"Notificarme",
       sec_contenido:"(Contenido)", sec_contenido_title:"Lo que estamos creando",
       cont_badge:"En producción",cont_title:"Contenido en camino",
-      cont_sub:"Videos, notas y recursos sobre diseño UX, IA y automatización para founders y builders en LATAM. Pronto en YouTube e Instagram.",
+      cont_sub:"Videos, notas y recursos sobre diseño, branding, IA y automatización para founders y builders en LATAM. Pronto en YouTube e Instagram.",
       sec_stack:"(Lo que usamos)",sec_stack_title:"Nuestras herramientas",
       connect_eyebrow:"(Hablemos)",
       connect_title_pre:"Conéctate con ",connect_title_span:"el lab",
       nl_tag:"Newsletter",nl_note:"Sin spam. Darte de baja cuando quieras.",
       contact_tag:"Contacto",
       newsletter_title:"Recursos útiles, directo a tu bandeja.",
-      newsletter_sub:"Templates, automatizaciones y recursos de diseño UX — todo lo que construimos, primero para quienes se suscriben.",
+      newsletter_sub:"Templates, automatizaciones, branding y recursos de diseño — todo lo que construimos en el lab, primero para quienes se suscriben.",
       newsletter_btn:"Suscribirme",
       contact_title:"¿Tienes algo en mente?", contact_sub:"Cuéntanos de qué se trata, respondemos cuando podamos.",
       footer_nav:"Navegación",footer_social:"Social",footer_products:"Productos",
@@ -1260,7 +1295,7 @@ function setTheme(theme){
       stat2_num:"+6",stat2_label:"Disciplines converging in every delivery.",
       stat3_num:"x3",stat3_label:"Faster than a traditional workflow.",
       p1_quote: "The best solutions grow from the center outward: from the user to the system.",
-      p2_quote: "Good design isn't imposed — it's discovered alongside the user.",
+      p2_quote: "Interdisciplinarity is not an added value — it's the core of how we operate.",
       p3_quote: "Less friction. More focus. That's it.",
       sec_productos:"(Products)", sec_productos_title:"What we have built",
       prod1_type:"Notion Template",prod1_title:"Digital metrics kit",
@@ -1281,7 +1316,7 @@ function setTheme(theme){
       nl_tag:"Newsletter",nl_note:"No spam. Unsubscribe anytime.",
       contact_tag:"Contact",
       newsletter_title:"Useful resources, straight to your inbox.",
-      newsletter_sub:"Templates, automations and UX resources — everything we build, first for subscribers.",
+      newsletter_sub:"Templates, automations, branding and design resources — everything we build in the lab, first for subscribers.",
       newsletter_btn:"Join the list",
       contact_title:"Got something in mind?", contact_sub:"Tell us what it is about, we reply when we can.",
       footer_nav:"Navigation",footer_social:"Social",footer_products:"Products",
@@ -1374,7 +1409,7 @@ function splitEnfoqueText(){
     e.preventDefault();
     var btn      = document.getElementById("nl-btn");
     var endpoint = form.getAttribute("data-endpoint");
-    if(!endpoint || endpoint.includes("xreoreqr")){
+    if(!endpoint){
       btn.textContent = "⚠ Configura Formspree primero";
       btn.style.background = "#FF6D4D";
       setTimeout(function(){ btn.textContent = "Suscribirme"; btn.style.background = ""; }, 3000);

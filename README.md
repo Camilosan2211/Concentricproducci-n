@@ -1,112 +1,110 @@
-# Concentric Lab — Sitio Web Oficial
+# Concéntrico Lab — Web Principal
 
-Sitio web de **Concentric Lab** — laboratorio digital de UX/UI, IA y automatización desde Bogotá, Colombia.
-
-## ¿Para qué sirve este README?
-
-El README es el primer documento que ve cualquier persona que abra el repositorio en GitHub. Sirve para:
-- Explicar qué es el proyecto y cómo está estructurado
-- Documentar cómo instalar, correr o deployar el sitio
-- Dejar pendientes y notas de configuración para el equipo (o para ti mismo en el futuro)
+> Laboratorio digital de diseño, branding, IA y automatización · Bogotá para LATAM  
+> https://concentricolab.vercel.app
 
 ---
 
 ## Stack
 
-- **HTML / CSS / JS puro** — sin frameworks, cero dependencias de build
-- **Fuentes:** Inter (Google Fonts) + Cal Sans (jsDelivr/fontsource)
-- **Formulario:** Formspree (`xreoreqr`) — ya configurado
-- **Deploy:** GitHub Pages o Netlify (drag & drop o CI automático)
+| Capa | Herramienta |
+|------|------------|
+| Hosting | Vercel (deploy automático desde GitHub) |
+| Frontend | HTML + CSS + JS vanilla (un solo archivo `index.html`) |
+| Fuentes | Cal Sans (display) · Inter (body) · vía CDN |
+| Newsletter | Formspree — Form ID: `xreoreqr` |
+| Animaciones | CSS keyframes + Intersection Observer |
+| Dark mode | Toggle manual + `prefers-color-scheme` |
+| i18n | ES / EN — objeto JS de traducciones en el mismo HTML |
 
 ---
 
-## Estructura del proyecto
+## Estructura del repositorio
 
 ```
-concentriclab/
-├── index.html              ← sitio completo (HTML + CSS + JS inline)
+/
+├── index.html          ← Sitio completo (todo en un archivo)
+├── sitemap.xml         ← Sitemap para Google Search Console
 ├── assets/
-│   ├── images/             ← todos los assets de imagen
-│   │   ├── logo.png
-│   │   ├── favicon.png
-│   │   ├── og-image.png
-│   │   ├── hero-1.webp
-│   │   ├── hero-2.webp
-│   │   ├── hero-3.webp
-│   │   ├── enfoque-label.png
-│   │   ├── producto-1.webp
-│   │   ├── principio-1.webp
-│   │   ├── principio-2.webp
-│   │   ├── principio-3.webp
-│   │   ├── yt-thumbnail.webp
-│   │   ├── contact-bg.webp
-│   │   ├── footer-bg.webp
-│   │   └── gumroad-icon.svg
-│   └── videos/
-│       └── stats-bg.mp4    ← video de fondo sección manifiesto
+│   ├── images/
+│   │   └── og-image.png   ← Imagen para redes sociales (og:image)
+│   ├── videos/
+│   │   └── stats-bg.mp4   ← Video de fondo en sección manifiesto
+│   └── fonts/             ← Cal Sans local (si aplica)
 └── README.md
 ```
 
 ---
 
-## Cómo deployar
+## Deploy
 
-### Opción A — GitHub Pages (recomendado para control de versiones)
-1. Sube todos los archivos a un repositorio en GitHub
-2. Ve a **Settings → Pages → Source → Deploy from branch → `main` → `/root`**
-3. GitHub genera la URL automáticamente (ej. `tu-usuario.github.io/concentriclab`)
+El deploy es automático: cualquier push a `main` activa un nuevo build en Vercel.
 
-### Opción B — Netlify (más rápido, drag & drop)
-1. Ve a [netlify.com/drop](https://netlify.com/drop)
-2. Arrastra la carpeta completa del proyecto
-3. URL disponible en segundos
-
-### Dominio propio
-Cuando tengas dominio (`concentriclab.com`):
-1. En Netlify/GitHub Pages: configura el dominio custom en Settings
-2. Busca `TODO` en `index.html` y actualiza la URL canónica
-3. Usa **Cloudflare Registrar** para el registro más barato + Cloudflare Pages para hosting gratuito
+Para desplegar manualmente:
+```bash
+# Si tienes Vercel CLI instalado
+vercel --prod
+```
 
 ---
 
-## Configuración pendiente
+## SEO implementado (Abril 2026)
 
-- [x] Formspree configurado — ID: `xreoreqr`
-- [ ] Actualizar URL canónica en `<head>` cuando tengas dominio propio
-- [ ] Crear productos "Blueprint Make/n8n" y "UI Kit Figma" cuando estén listos
-- [ ] Agregar link real de Notion Store al botón "Descarga en Notion"
-- [ ] Subir más videos al canal de YouTube para activar sección de contenido
+Todo el SEO vive dentro del `<head>` de `index.html`. No requiere configuración externa en Vercel.
 
----
+**Activo automáticamente al hacer deploy:**
+- `<title>` y `<meta description>` optimizados
+- Open Graph completo (og:title, og:description, og:image con URL absoluta)
+- Twitter Card
+- `robots: index, follow`
+- `author`, `keywords`, `theme-color`
+- `hreflang` ES / EN / x-default
+- Link a `sitemap.xml`
+- Schema.org — Organization + WebSite + Productos (JSON-LD)
 
-## Funcionalidades del sitio
-
-| Feature | Descripción |
-|---|---|
-| **Modo oscuro / claro** | Guardado en `localStorage`, respeta `prefers-color-scheme` del sistema |
-| **Bilingüe ES / EN** | Sistema i18n propio, sin librerías externas |
-| **Animación letra por letra** | El párrafo de Enfoque anima cada carácter individualmente al hacer scroll |
-| **Slider de principios** | Autoavance cada 6s, swipe táctil, dots y flechas |
-| **Cursor personalizado** | Solo en desktop con mouse (pointer:fine) |
-| **Contador animado** | Los números del manifiesto se animan al entrar en viewport |
-| **Progress bar** | Barra de progreso de scroll en la parte superior |
-| **Newsletter** | Integrado con Formspree, envío AJAX sin recarga |
+**Requiere acción manual de Camilo:**
+1. Ir a [search.google.com/search-console](https://search.google.com/search-console)
+2. Añadir propiedad: `concentricolab.vercel.app`
+3. Verificar con el meta tag → pegarlo en el comentario del HTML donde dice `PEGA_TU_CÓDIGO_AQUÍ`
+4. Enviar sitemap: ir a Sitemaps → escribir `/sitemap.xml` → Enviar
 
 ---
 
-## Paleta de colores
+## Dark mode
 
-| Variable | Valor | Uso |
-|---|---|---|
-| `--blue` | `rgb(80,90,245)` | Color principal de marca |
-| `--salmon` | `rgb(244,120,85)` | Coral de marca, acentos cálidos |
-| `--pink` | `rgb(255,130,225)` | Acentos secundarios |
-| `--blue-lt` | `rgb(130,138,255)` | Versión clara del azul (secciones dark) |
+Los fondos oscuros usan **`#00031F`** como base (no negro puro), preservando los efectos de glow y glass.
+
+| Variable CSS | Valor dark |
+|-------------|-----------|
+| `--bg` | `#00031F` |
+| `--bg-alt` | `#020425` |
+| `--bg-dark-section` | `#010316` |
+| `--dark` | `#00031F` |
+| `--dark-glass` | `rgba(0, 3, 31, 0.85)` |
 
 ---
 
-## Créditos
+## Newsletter
 
-Diseño, desarrollo y contenido: **Concentric Lab**  
-Bogotá, Colombia · 2026  
-[concentriclab.com](https://concentriclab.com) · [@concentriclab](https://instagram.com/concentriclab)
+El formulario usa Formspree con Form ID `xreoreqr`.  
+Endpoint: `https://formspree.io/f/xreoreqr`  
+Estado: ✅ Activo y funcional (bug de validación corregido en Abril 2026)
+
+---
+
+## i18n
+
+El sitio tiene traducciones ES/EN completas implementadas como un objeto JS en el propio `index.html`. El idioma se alterna con el botón ES/EN en la barra de navegación.
+
+---
+
+## Mantenimiento
+
+- **Añadir producto nuevo:** buscar `<!-- PRODUCTOS -->` en `index.html` y duplicar un bloque `.product-card`
+- **Cambiar texto del hero:** buscar `hero_sub` en el objeto de traducciones (ES y EN)
+- **Actualizar stack:** buscar `<!-- STACK -->` en `index.html`
+- **Cambiar colores:** modificar las variables CSS en `:root` y en `.dark` al inicio del `<style>`
+
+---
+
+*Concéntrico Lab · Bogotá · 2025–2026*
