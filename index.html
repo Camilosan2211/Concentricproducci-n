@@ -761,6 +761,24 @@ body:not(.dark) .connect-contact{box-shadow:0 2px 16px rgba(0,0,0,.05)}
   </div>
 </div>
 
+  <section id="video-scroll-section">
+    <div class="video-sticky-container">
+        <video id="logo-scroll-video" src="assets/videos/logo-particulas.mp4" muted playsinline preload="auto"></video>
+        <div class="video-overlay" id="video-overlay"></div>
+        <div class="video-text-content">
+            <div class="section-label" style="justify-content: center;">
+                <span style="color:var(--blue);font-size:20px;font-weight:700;">(</span>
+                <span class="enfoque-hola-badge">hola 👋</span>
+                <span style="color:var(--white);font-weight:600;text-transform:uppercase;">Nuestro enfoque</span>
+                <span style="color:var(--blue);font-size:20px;font-weight:700;">)</span>
+            </div>
+            <p class="enfoque-text" style="color: white; font-size: 32px; margin-top: 20px;">
+                Construimos desde el núcleo hacia afuera — del usuario al sistema, del problema a la solución — combinando diseño, IA y automatización.
+            </p>
+        </div>
+    </div>
+</section>
+
 <!-- ══════════════════════════════════════════════
      ENFOQUE
 ══════════════════════════════════════════════ -->
@@ -1639,5 +1657,19 @@ function splitEnfoqueText(){
   video.load();
 })();
 </script>
+
+<script>
+    gsap.registerPlugin(ScrollTrigger);
+    const video = document.getElementById("logo-scroll-video");
+    if(video) {
+        video.addEventListener("loadedmetadata", function() {
+            let tl = gsap.timeline({ scrollTrigger: { trigger: "#video-scroll-section", start: "top top", end: "bottom bottom", scrub: 1 } });
+            tl.fromTo(video, { currentTime: 0 }, { currentTime: video.duration, duration: 1, ease: "none" }, 0);
+            tl.to("#video-overlay", { backgroundColor: 'rgba(0,0,0,0.4)', backdropFilter: "blur(8px)", duration: 0.2 }, 0.45);
+            tl.to(".video-text-content", { opacity: 1, y: 0, duration: 0.3 }, 0.55);
+        });
+    }
+</script>
+  
 </body>
 </html>
