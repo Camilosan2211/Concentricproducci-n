@@ -1601,75 +1601,54 @@ function splitEnfoqueText(){
   }
 })();
   
-</script>
-<script>
-/* ══════════════════════════════════════════════
-   GSAP VIDEO SCROLL 
-   Controla la reproducción, el blur y la aparición de texto
-══════════════════════════════════════════════ */
-(function initVideoScroll(){
-  if(typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
-
-  const video = document.getElementById("logo-scroll-video");
-  const overlay = document.getElementById("video-overlay");
-  const textContent = document.querySelector(".video-text-content");
-
-  if(!video) return;
-
-  // Esperar a que el video cargue sus metadatos para saber cuánto dura
-  video.addEventListener("loadedmetadata", function() {
-    let duration = video.duration || 1; // Fallback por si acaso
-
-    let tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: "#video-scroll-section",
-        start: "top top",      // Inicia cuando el contenedor toca arriba
-        end: "bottom bottom",  // Termina cuando acaba la sección de 400vh
-        scrub: 1               // Suavizado del scroll (1 segundo de inercia)
-      }
-    });
-
-    // 1. Animar el tiempo del video (del segundo 0 hasta el final)
-    tl.fromTo(video, 
-      { currentTime: 0 }, 
-      { currentTime: duration, duration: 1, ease: "none" }, 
-      0
-    );
-
-    // 2. A mitad del recorrido (0.5), aplicamos el cristal/desenfoque
-    tl.to(overlay, {
-      backgroundColor: document.body.classList.contains('dark') ? 'rgba(0,3,31,0.5)' : 'rgba(255,255,255,0.4)',
-      backdropFilter: "blur(8px)",
-      webkitBackdropFilter: "blur(8px)",
-      duration: 0.2
-    }, 0.45);
-
-    // 3. Un poco después, hacemos que el texto suba y aparezca
-    tl.to(textContent, {
-      opacity: 1,
-      y: 0,
-      duration: 0.3
-    }, 0.55);
-
-  });
-
-  // Forzar la carga inicial en algunos navegadores (Safari)
-  video.load();
-})();
-</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
 
 <script>
+window.addEventListener('load', function() {
+    // Verificación de seguridad
+    if(typeof gsap === 'undefined') return;
     gsap.registerPlugin(ScrollTrigger);
+
     const video = document.getElementById("logo-scroll-video");
-    if(video) {
-        video.addEventListener("loadedmetadata", function() {
-            let tl = gsap.timeline({ scrollTrigger: { trigger: "#video-scroll-section", start: "top top", end: "bottom bottom", scrub: 1 } });
-            tl.fromTo(video, { currentTime: 0 }, { currentTime: video.duration, duration: 1, ease: "none" }, 0);
-            tl.to("#video-overlay", { backgroundColor: 'rgba(0,0,0,0.4)', backdropFilter: "blur(8px)", duration: 0.2 }, 0.45);
-            tl.to(".video-text-content", { opacity: 1, y: 0, duration: 0.3 }, 0.55);
+    const overlay = document.getElementById("video-overlay");
+    const textContent = document.querySelector(".video-text-content");
+
+    if(!video) return;
+
+    // Función para iniciar la animación
+    function initGSAP() {
+        let tl = gsap.timeline({ 
+            scrollTrigger: { 
+                trigger: "#video-scroll-section", 
+                start: "top top", 
+                end: "bottom bottom", 
+                scrub: 1 
+            } 
         });
+
+        tl.fromTo(video, 
+            { currentTime: 0 }, 
+            { currentTime: video.duration, duration: 1, ease: "none" }, 0
+        );
+
+        tl.to(overlay, { 
+            backgroundColor: document.body.classList.contains('dark') ? 'rgba(0,3,31,0.5)' : 'rgba(255,255,255,0.4)', 
+            backdropFilter: "blur(8px)", 
+            webkitBackdropFilter: "blur(8px)", 
+            duration: 0.2 
+        }, 0.45);
+
+        tl.to(textContent, { opacity: 1, y: 0, duration: 0.3 }, 0.55);
     }
+
+    if (video.readyState >= 1) {
+        initGSAP();
+    } else {
+        video.addEventListener("loadedmetadata", initGSAP);
+    }
+});
 </script>
-  
+
 </body>
 </html>
