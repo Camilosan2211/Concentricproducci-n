@@ -575,9 +575,9 @@ body:not(.dark) .connect-contact{box-shadow:0 2px 16px rgba(0,0,0,.05)}
 .lab-stat-row.in .lab-stat-num-sm{animation:countUp .6s cubic-bezier(.22,1,.36,1) forwards}
 
 /* ═══════ VIDEO SCROLL SECTION ═══════ */
-/* Pista de scroll: 400vh = espacio total que consume el sticky */
+/* Pista de scroll: 220vh — suficiente sin exceso */
 #video-scroll-section{
-  height:400vh;
+  height:220vh;
   position:relative;
 }
 /* Contenedor sticky: se queda fijo durante todo el scroll de la pista */
@@ -589,7 +589,7 @@ body:not(.dark) .connect-contact{box-shadow:0 2px 16px rgba(0,0,0,.05)}
   display:flex;
   align-items:center;
   justify-content:center;
-  background:#00031F; /* fallback mientras carga el video */
+  background:#00031F;
 }
 /* Video ocupa el 100% del contenedor fijo */
 #logo-scroll-video{
@@ -599,32 +599,67 @@ body:not(.dark) .connect-contact{box-shadow:0 2px 16px rgba(0,0,0,.05)}
   height:100%;
   object-fit:cover;
   display:block;
-  /* max-width:100% del reset global lo sobreescribimos con !important
-     porque en este caso necesitamos que el video llene el viewport */
   max-width:none !important;
 }
-/* Overlay: recibe el blur/oscuro vía GSAP */
+/* Vignette permanente — bordes oscuros siempre visibles,
+   encuadra el video y da look cinematográfico */
+.video-sticky-container::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:2;
+  background:radial-gradient(ellipse 90% 85% at 50% 50%,
+    transparent 40%,
+    rgba(0,3,31,.6) 100%);
+}
+/* Grano animado — textura independiente del video,
+   hace que los saltos de frame sean casi imperceptibles */
+.video-grain{
+  position:absolute;
+  inset:-50%;
+  width:200%;
+  height:200%;
+  pointer-events:none;
+  z-index:3;
+  opacity:.04;
+  mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:200px 200px;
+  animation:grainMove .12s steps(1) infinite;
+}
+@keyframes grainMove{
+  0%  {transform:translate(0,0)}
+  10% {transform:translate(-3%,-4%)}
+  20% {transform:translate(2%,5%)}
+  30% {transform:translate(-5%,2%)}
+  40% {transform:translate(4%,-3%)}
+  50% {transform:translate(-2%,6%)}
+  60% {transform:translate(5%,-1%)}
+  70% {transform:translate(-4%,3%)}
+  80% {transform:translate(3%,-5%)}
+  90% {transform:translate(-1%,4%)}
+  100%{transform:translate(2%,-2%)}
+}
+/* Overlay: recibe el blur/oscuro vía GSAP (z-index 4 = sobre el grano) */
 #video-scroll-overlay{
   position:absolute;
   inset:0;
   pointer-events:none;
   background:transparent;
-  z-index:1;
-  /* backdrop-filter arranca en 0 — GSAP lo sube */
+  z-index:4;
   -webkit-backdrop-filter:blur(0px);
   backdrop-filter:blur(0px);
 }
 /* Texto que aparece al 55% del scroll */
 #video-scroll-text{
   position:relative;
-  z-index:2;
+  z-index:5;
   text-align:center;
   opacity:0;
   transform:translateY(40px);
   padding:var(--pad);
   max-width:720px;
-  /* GSAP modifica opacity y transform — NO pongas transition aquí,
-     GSAP y CSS transition se pisan */
 }
 #video-scroll-text h2{
   font-family:"Cal Sans",sans-serif;
@@ -633,7 +668,7 @@ body:not(.dark) .connect-contact{box-shadow:0 2px 16px rgba(0,0,0,.05)}
   line-height:1.1;
   letter-spacing:-1px;
   margin-bottom:16px;
-  text-shadow:0 2px 24px rgba(0,0,0,.4);
+  text-shadow:0 2px 32px rgba(0,0,0,.6);
 }
 #video-scroll-text p{
   font-size:clamp(14px,1.7vw,17px);
@@ -782,6 +817,10 @@ body:not(.dark) .connect-contact{box-shadow:0 2px 16px rgba(0,0,0,.05)}
       playsinline
       preload="auto"
     ></video>
+
+    <!-- Grano animado: capa de textura independiente del video,
+         hace invisibles los saltos de frame al hacer scroll -->
+    <div class="video-grain" aria-hidden="true"></div>
 
     <!-- Overlay: blur + oscuro aparecen al 45% del scroll vía GSAP -->
     <div id="video-scroll-overlay"></div>
@@ -1703,7 +1742,7 @@ window.addEventListener("load", function () {
       trigger : "#video-scroll-section",
       start   : "top top",
       end     : "bottom bottom",
-      scrub   : 1,
+      scrub   : 2,
       onUpdate: function (self) {
         /* Clamp para evitar valores fuera del rango válido del video */
         var t = Math.min(self.progress * duration, duration - 0.001);
@@ -1717,7 +1756,7 @@ window.addEventListener("load", function () {
         trigger: "#video-scroll-section",
         start  : "top top",
         end    : "bottom bottom",
-        scrub  : 1
+        scrub  : 2
       }
     });
 
